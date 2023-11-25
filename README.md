@@ -24,6 +24,7 @@ nvm use --lts
 Install the frontend dependencies.
 
 ```shell
+cd ./frontend
 npm ci
 ```
 
@@ -33,6 +34,23 @@ Run the start-up script.
 
 ```shell
 source startup.sh
+```
+
+## Running
+
+Assuming all dependencies are installed, the backend and frontend servers can be run now.
+
+Backend:
+
+```shell
+source run.sh
+```
+
+Frontend:
+
+```shell
+cd ./frontend
+npm start
 ```
 
 ## Docs
