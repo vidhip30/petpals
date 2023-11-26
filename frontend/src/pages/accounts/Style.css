@@ -1,0 +1,157 @@
+* {
+  font-family: Poppins, sans-serif;
+}
+
+#create,
+#login {
+  background-color: #333973;
+  opacity: 77%;
+  display: block;
+  margin: 0 auto;
+}
+
+#create:hover,
+#login:hover {
+  opacity: 100%;
+}
+
+#brand-name {
+  color: #fff;
+  font-family: "Luckiest Guy", sans-serif;
+  position: absolute;
+  top: 20px;
+  left: 76px;
+  font-size: 60px !important;
+}
+
+.nav-tabs,
+.hr {
+  margin-left: -49px;
+  margin-right: -49px;
+}
+
+.nav-link {
+  color: #8086bd !important;
+  background-color: rgb(224, 224, 224) !important;
+}
+
+.active {
+  color: #333973 !important;
+  background-color: #fff !important;
+}
+
+span {
+  margin-left: 15px;
+}
+
+#form-title {
+  color: #858585;
+  font-weight: 100;
+}
+
+#signuptitle,
+#logintitle {
+  font-weight: 700;
+  color: #333973;
+}
+
+#logintitle {
+  margin-top: 10px;
+}
+
+#passwordHelpBlock {
+  font-size: x-small;
+}
+
+#haveacc {
+  text-align: center;
+  color: #333973;
+  margin-bottom: -20px;
+}
+
+#success {
+  text-align: center;
+}
+#text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 200px;
+  height: 100px;
+}
+
+#loginlink,
+#signuplink {
+  color: #5c6198;
+}
+
+.form-control {
+  border: 1px #999cb9 solid !important;
+  border-radius: 3px !important;
+}
+
+html,
+main {
+  background-color: #f8f6f2;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+#logo {
+  margin-top: 31px;
+  margin-left: 17px;
+  transform: rotate(-20deg);
+}
+
+main {
+  /* background-image: url("/images/signupback.jpg"); */
+  height: 100%;
+  background-position-x: -200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hr {
+  margin-bottom: 28px;
+}
+
+form {
+  display: block;
+  margin: 0 auto;
+  width: 700px;
+  margin-top: 15px;
+  background-color: white;
+}
+
+#loginform {
+  width: 450px;
+  height: 400px;
+  margin-top: 80px;
+}
+
+@media screen and (max-width: 550px) {
+  #loginform {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #account-form {
+    width: 95%;
+  }
+
+  #brand-name {
+    font-size: 220% !important;
+  }
+
+  #logo {
+    transform: scale(0.7) rotate(-20deg);
+    margin-top: 1rem;
+  }
+}

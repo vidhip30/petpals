@@ -1,7 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { SignupForm } from "./pages/accounts/SignupForm";
 
 function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Landing />} />
+          <Route path="accounts">
+            <Route path="signup" element={<SignupForm />}></Route>
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+const Landing = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +37,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
