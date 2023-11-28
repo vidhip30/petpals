@@ -1,8 +1,24 @@
-import { TextField, validatePassword, validatePlaintext } from "./TextField";
+import { TextField, validatePlaintext } from "./TextField";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useEffect, useState } from "react";
+import { PasswordField } from "./PasswordField";
 
 export const SeekerFormBody = () => {
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [password, setPassword] = useState("");
+
+  const [isPasswordRptValid, setIsPasswordRptValid] = useState(false);
+  const [passwordRpt, setPasswordRpt] = useState("");
+
+  useEffect(() => {
+    setIsPasswordValid(validatePassword(password));
+  }, [setIsPasswordValid, password]);
+
+  useEffect(() => {
+    setIsPasswordRptValid(validatePasswordRepeat(password, passwordRpt));
+  }, [isPasswordRptValid, password, passwordRpt]);
+
   return (
     <>
       <div className="row">
@@ -35,21 +51,23 @@ export const SeekerFormBody = () => {
         errorMessage={"Please choose a username."}
         validate={validatePlaintext}
       />
-      <TextField
+      <PasswordField
         fieldName="Password"
-        type="password"
         errorMessage={"Please choose a valid password."}
-        validate={validatePassword}
+        isValid={isPasswordValid}
+        password={password}
+        setPassword={setPassword}
       />
       <Form.Text id="passwordHelpBlock" className="form-text mb-3">
         Your password must be 8-20 characters long, contain letters and numbers,
         and must not contain spaces or emoji.
       </Form.Text>
-      <TextField
+      <PasswordField
         fieldName="Confirm password"
-        type="password"
         errorMessage={"Please confirm your password."}
-        validate={validatePassword}
+        isValid={isPasswordRptValid}
+        password={passwordRpt}
+        setPassword={setPasswordRpt}
       />
       <Button
         id="create"
@@ -61,4 +79,17 @@ export const SeekerFormBody = () => {
       </Button>
     </>
   );
+};
+
+const validatePassword = (password) => {
+  if (password.length < 8 || password.length > 20) {
+    return false;
+  }
+
+  // Source: https://javascript.plainenglish.io/check-if-string-is-alphanumeric-in-javascript-e325caa3ee?gi=338b1017d1a4
+  return /^[a-zA-Z0-9]+$/.test(password);
+};
+
+const validatePasswordRepeat = (password, repeat) => {
+  return password === repeat;
 };

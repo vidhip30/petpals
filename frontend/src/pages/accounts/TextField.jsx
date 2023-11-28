@@ -32,11 +32,9 @@ export const validatePlaintext = (text) => {
   return text.trim().length > 0;
 };
 
-export const validatePassword = (password) => {
-  if (password.length < 8 || password.length > 20) {
-    return false;
-  }
-
-  // Source: https://javascript.plainenglish.io/check-if-string-is-alphanumeric-in-javascript-e325caa3ee?gi=338b1017d1a4
-  return /^[a-zA-Z0-9]+$/.test(password);
+export const validateEmail = (email) => {
+  // Source: https://stackoverflow.com/a/46181
+  return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email,
+  );
 };

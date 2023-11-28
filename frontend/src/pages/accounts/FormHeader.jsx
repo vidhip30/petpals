@@ -6,14 +6,27 @@ export const FormHeader = ({
   return (
     <div className="form-header">
       <ul className="nav nav-tabs mb-3">
-        <li className="nav-item cur">
-          <btn className="nav-link" onClick={handleSeekerClick}>
+        <li
+          className={accountType === "Pet Seeker" ? "nav-item cur" : "nav-item"}
+        >
+          <btn
+            className={
+              accountType === "Pet Seeker" ? "nav-link active" : "nav-link"
+            }
+            onClick={handleSeekerClick}
+          >
             Pet Seeker
           </btn>
         </li>
-        <li className="nav-item">
+        <li
+          className={
+            accountType === "Pet Shelter" ? "nav-item cur" : "nav-item"
+          }
+        >
           <btn
-            className="nav-link active"
+            className={
+              accountType === "Pet Shelter" ? "nav-link active" : "nav-link"
+            }
             aria-current="page"
             onClick={handleShelterClick}
           >
