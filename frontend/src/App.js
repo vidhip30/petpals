@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { SignupForm } from "./pages/accounts/SignupForm";
+import { SignupPage } from "./components/accounts/SignupPage";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <Route path="/">
           <Route index element={<Landing />} />
           <Route path="accounts">
-            <Route path="signup" element={<SignupForm />}></Route>
+            <Route path="signup" element={<SignupPage />}></Route>
           </Route>
         </Route>
       </Routes>

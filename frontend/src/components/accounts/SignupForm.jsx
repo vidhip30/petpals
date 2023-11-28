@@ -38,42 +38,31 @@ export const SignupForm = () => {
   };
 
   return (
-    <>
-      <div>
-        <button
-          id="brand-name"
-          className="navbar-brand fs-1 text-decoration-none"
-        >
-          PetPals
-        </button>
-        <img id="logo" src="/images/paw.png" alt="PetPal logo" width="50px" />
-      </div>
-      <Form
-        className="p-5 pt-0 border rounded shadow-sm needs-validation"
-        id="account-form"
-        noValidate
-        validated={validated}
-        onSubmit={handleSubmit}
-      >
-        <FormHeader
-          accountType={accountType}
-          handleSeekerClick={() => {
-            setAccountType("Pet Seeker");
-          }}
-          handleShelterClick={() => {
-            setAccountType("Pet Shelter");
-          }}
-        />
-        <hr className="hr" />
-        {accountType === "Pet Seeker" && <SeekerFormBody />}
-        {accountType === "Pet Shelter" && <ShelterFormBody />}
-        <p id="haveacc">
-          Already have an account?&nbsp;
-          <a id="loginlink" href="login.html">
-            Log in
-          </a>
-        </p>
-      </Form>
-    </>
+    <Form
+      className="p-5 pt-0 border rounded shadow-sm needs-validation"
+      id="account-form"
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
+    >
+      <FormHeader
+        accountType={accountType}
+        handleSeekerClick={() => {
+          setAccountType("Pet Seeker");
+        }}
+        handleShelterClick={() => {
+          setAccountType("Pet Shelter");
+        }}
+      />
+      <hr className="hr" />
+      {accountType === "Pet Seeker" && <SeekerFormBody />}
+      {accountType === "Pet Shelter" && <ShelterFormBody />}
+      <p id="haveacc">
+        Already have an account?&nbsp;
+        <a id="loginlink" href="login.html">
+          Log in
+        </a>
+      </p>
+    </Form>
   );
 };
