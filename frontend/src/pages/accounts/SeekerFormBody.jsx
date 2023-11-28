@@ -1,4 +1,4 @@
-import { TextField, validatePlaintext } from "./TextField";
+import { TextField, validateEmail, validatePlaintext } from "./TextField";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
@@ -24,7 +24,8 @@ export const SeekerFormBody = () => {
       <div className="row">
         <div className="col">
           <TextField
-            fieldName="First name"
+            fieldName="first_name"
+            placeholder="First name"
             type="text"
             errorMessage={"Please enter your first name."}
             validate={validatePlaintext}
@@ -32,7 +33,8 @@ export const SeekerFormBody = () => {
         </div>
         <div className="col">
           <TextField
-            fieldName="Last name"
+            fieldName="last_name"
+            placeholder="Last name"
             type="text"
             errorMessage={"Please enter your last name."}
             validate={validatePlaintext}
@@ -40,19 +42,22 @@ export const SeekerFormBody = () => {
         </div>
       </div>
       <TextField
-        fieldName="Email"
+        fieldName="email"
+        placeholder="Email"
         type="email"
         errorMessage={"Please enter a valid email address."}
-        validate={validatePlaintext}
+        validate={validateEmail}
       />
       <TextField
-        fieldName="Username"
+        fieldName="username"
+        placeholder="Username"
         type="text"
         errorMessage={"Please choose a username."}
         validate={validatePlaintext}
       />
       <PasswordField
-        fieldName="Password"
+        fieldName="password"
+        placeholder="Password"
         errorMessage={"Please choose a valid password."}
         isValid={isPasswordValid}
         password={password}
@@ -63,7 +68,8 @@ export const SeekerFormBody = () => {
         and must not contain spaces or emoji.
       </Form.Text>
       <PasswordField
-        fieldName="Confirm password"
+        fieldName="password_repeat"
+        placeholder="Confirm password"
         errorMessage={"Please confirm your password."}
         isValid={isPasswordRptValid}
         password={passwordRpt}

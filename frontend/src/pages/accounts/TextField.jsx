@@ -1,7 +1,13 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 
-export const TextField = ({ fieldName, type, errorMessage, validate }) => {
+export const TextField = ({
+  fieldName,
+  placeholder,
+  type,
+  errorMessage,
+  validate,
+}) => {
   const [text, setText] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
@@ -11,7 +17,8 @@ export const TextField = ({ fieldName, type, errorMessage, validate }) => {
       <Form.Control
         required
         className="form-field mt-3"
-        placeholder={fieldName}
+        name={fieldName}
+        placeholder={placeholder}
         type={type}
         value={text}
         isInvalid={!isValid && isChanged}

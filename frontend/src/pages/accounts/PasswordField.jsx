@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 
 export const PasswordField = ({
   fieldName,
+  placeholder,
   errorMessage,
   isValid,
   password,
@@ -16,7 +17,8 @@ export const PasswordField = ({
         required
         className="form-field mt-3"
         type="password"
-        placeholder={fieldName}
+        name={fieldName}
+        placeholder={placeholder}
         value={password}
         isInvalid={!isValid && isChanged}
         onChange={(e) => {

@@ -22,25 +22,29 @@ export const ShelterFormBody = () => {
   return (
     <>
       <TextField
-        fieldName="Pet shelter name"
+        fieldName="name"
+        placeholder="Pet shelter name"
         type="text"
         errorMessage={"Please enter a name."}
         validate={validatePlaintext}
       />
       <TextField
-        fieldName="Email"
+        fieldName="email"
+        placeholder="Email"
         type="email"
         errorMessage={"Please enter a valid email address."}
         validate={validateEmail}
       />
       <TextField
-        fieldName="Username"
+        fieldName="username"
+        placeholder="Username"
         type="text"
         errorMessage={"Please choose a username."}
         validate={validatePlaintext}
       />
       <PasswordField
-        fieldName="Password"
+        fieldName="password"
+        placeholder="Password"
         errorMessage={"Please choose a valid password."}
         isValid={isPasswordValid}
         password={password}
@@ -51,7 +55,8 @@ export const ShelterFormBody = () => {
         and must not contain spaces or emoji.
       </Form.Text>
       <PasswordField
-        fieldName="Confirm password"
+        fieldName="password_repeat"
+        placeholder="Confirm password"
         errorMessage={"Please confirm your password."}
         isValid={isPasswordRptValid}
         password={passwordRpt}

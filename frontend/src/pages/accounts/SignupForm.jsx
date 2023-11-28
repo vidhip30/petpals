@@ -4,21 +4,37 @@ import { FormHeader } from "./FormHeader";
 import "./Style.css";
 import { useState } from "react";
 import { SeekerFormBody } from "./SeekerFormBody";
+import { registerPetSeeker } from "../../api/accounts";
 
 // Source: https://react-bootstrap.netlify.app/docs/forms/validation
 export const SignupForm = () => {
   const [accountType, setAccountType] = useState("Pet Shelter");
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
+    event.preventDefault();
 
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
+      return;
     }
 
-    setValidated(true);
+    const registerData = new FormData(form);
+    const payload = {};
+
+    registerData.forEach((value, field) => {
+      payload[field] = value;
+    });
+
+    const response = await registerPetSeeker(payload);
+
+    if (response.status === 201) {
+      console.log("Registration successful!");
+    } else {
+      console.log("Error with registration!");
+    }
   };
 
   return (
