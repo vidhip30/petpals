@@ -36,6 +36,15 @@ Run the start-up script.
 source startup.sh
 ```
 
+### Misc
+
+Pre-commit hooks for code formatting.
+
+```shell
+pip install pre-commit
+pre-commit install
+```
+
 ## Running
 
 Assuming all dependencies are installed, the backend and frontend servers can be run now.
