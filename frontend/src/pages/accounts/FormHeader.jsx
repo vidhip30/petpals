@@ -9,29 +9,31 @@ export const FormHeader = ({
         <li
           className={accountType === "Pet Seeker" ? "nav-item cur" : "nav-item"}
         >
-          <btn
+          <button
             className={
               accountType === "Pet Seeker" ? "nav-link active" : "nav-link"
             }
             onClick={handleSeekerClick}
+            type="button"
           >
             Pet Seeker
-          </btn>
+          </button>
         </li>
         <li
           className={
             accountType === "Pet Shelter" ? "nav-item cur" : "nav-item"
           }
         >
-          <btn
+          <button
             className={
               accountType === "Pet Shelter" ? "nav-link active" : "nav-link"
             }
             aria-current="page"
             onClick={handleShelterClick}
+            type="button"
           >
             Pet Shelter
-          </btn>
+          </button>
         </li>
       </ul>
       <h1 id="formtitle" className="d-flex justify-content-center">
