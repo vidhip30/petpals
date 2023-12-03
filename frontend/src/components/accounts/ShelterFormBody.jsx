@@ -1,6 +1,10 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { TextField, validatePlaintext, validateEmail } from "./TextField";
+import {
+  TextField,
+  validatePlaintext,
+  validateEmail,
+} from "../shared/TextField";
 import { PasswordField } from "./PasswordField";
 import { useEffect, useState } from "react";
 

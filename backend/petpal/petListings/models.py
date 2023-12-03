@@ -25,6 +25,6 @@ class PetListing(models.Model):
     name = models.CharField(max_length=255,null=True,blank=True)
     age = models.IntegerField(null=True,blank=True)
     size = models.IntegerField(null=True,blank=True)
-    colour = models.CharField(max_length=255,null=True,blank=True)
+    description = models.CharField(max_length=255,null=True,blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=255,null=True,blank=True)
     picture = models.ImageField(upload_to='pets/',null=True,blank=True)

@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignupPage } from "./components/accounts/SignupPage";
+import { PetCreatePage } from "./components/shelter/PetCreatePage";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
           <Route index element={<Landing />} />
           <Route path="accounts">
             <Route path="signup" element={<SignupPage />}></Route>
+          </Route>
+          <Route path="shelters">
+            <Route path="create-pet" element={<PetCreatePage />}></Route>
           </Route>
         </Route>
       </Routes>
