@@ -2,7 +2,7 @@ import { SignupForm } from "../../components/accounts/signup/SignupForm";
 
 export const SignupPage = () => {
   return (
-    <>
+    <div id="account-container">
       <div id="brand-container">
         <img id="logo" src="/images/paw.png" alt="PetPal logo" width="50px" />
         <button
@@ -13,6 +13,6 @@ export const SignupPage = () => {
         </button>
       </div>
       <SignupForm />
-    </>
+    </div>
   );
 };

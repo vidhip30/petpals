@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignupPage } from "./pages/accounts/SignupPage";
 import { PetCreatePage } from "./pages/petListings/PetCreatePage";
+import { PageNotFound } from "./pages/misc/PageNotFound";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="shelters">
             <Route path="create-pet" element={<PetCreatePage />}></Route>
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
