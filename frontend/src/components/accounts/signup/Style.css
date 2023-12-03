@@ -119,7 +119,7 @@ html {
 }
 
 #root {
-  background-image: url("../../../public/images/accounts-bg.jpg");
+  background-image: url("../../../../public/images/accounts-bg.jpg");
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;

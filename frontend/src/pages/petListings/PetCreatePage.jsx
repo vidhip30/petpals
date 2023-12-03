@@ -1,4 +1,4 @@
-import { PetCreateForm } from "./PetCreateForm";
+import { PetCreateForm } from "../../components/shelter/PetCreateForm";
 
 export const PetCreatePage = () => {
   return (

@@ -4,7 +4,7 @@ import {
   TextField,
   validatePlaintext,
   validateEmail,
-} from "../shared/TextField";
+} from "../../shared/TextField";
 import { PasswordField } from "./PasswordField";
 import { useEffect, useState } from "react";
 

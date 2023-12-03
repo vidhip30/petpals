@@ -2,7 +2,7 @@ import {
   TextField,
   validateEmail,
   validatePlaintext,
-} from "../shared/TextField";
+} from "../../shared/TextField";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";

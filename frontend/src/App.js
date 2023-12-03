@@ -1,8 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { SignupPage } from "./components/accounts/SignupPage";
-import { PetCreatePage } from "./components/shelter/PetCreatePage";
+import { SignupPage } from "./pages/accounts/SignupPage";
+import { PetCreatePage } from "./pages/petListings/PetCreatePage";
 
 function App() {
   return (

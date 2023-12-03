@@ -4,7 +4,7 @@ import { FormHeader } from "./FormHeader";
 import "./Style.css";
 import { useState } from "react";
 import { SeekerFormBody } from "./SeekerFormBody";
-import { registerPetSeeker, registerShelter } from "../../api/accounts";
+import { registerPetSeeker, registerShelter } from "../../../api/accounts";
 
 // Source: https://react-bootstrap.netlify.app/docs/forms/validation
 export const SignupForm = () => {
