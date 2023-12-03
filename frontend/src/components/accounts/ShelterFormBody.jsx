@@ -72,7 +72,7 @@ export const ShelterFormBody = () => {
         type="submit"
         value="Create Account"
       >
-        Submit
+        Create Account
       </Button>
     </>
   );

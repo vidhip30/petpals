@@ -85,7 +85,7 @@ export const SeekerFormBody = () => {
         type="submit"
         value="Create Account"
       >
-        Submit
+        Create Account
       </Button>
     </>
   );

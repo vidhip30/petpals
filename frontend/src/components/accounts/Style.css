@@ -18,10 +18,25 @@
 #brand-name {
   color: #fff;
   font-family: "Luckiest Guy", sans-serif;
-  position: absolute;
-  top: 20px;
-  left: 76px;
   font-size: 60px !important;
+  /* Source: https://stackoverflow.com/questions/22672368/how-to-make-a-transparent-html-button*/
+  background-color: transparent;
+  border: none;
+  cursor: default;
+  outline: none;
+}
+
+#logo {
+  transform: rotate(-20deg);
+}
+
+#brand-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 20px;
+  padding-left: 17px;
+  gap: 10px;
 }
 
 .nav-tabs,
@@ -103,16 +118,9 @@ html {
   height: 100%;
 }
 
-#logo {
-  margin-top: 31px;
-  margin-left: 17px;
-  transform: rotate(-20deg);
-}
-
-main {
-  /* background-image: url("/images/signupback.jpg"); */
+#root {
+  background-image: url("../../../public/images/accounts-bg.jpg");
   height: 100%;
-  background-position-x: -200px;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -152,6 +160,5 @@ form {
 
   #logo {
     transform: scale(0.7) rotate(-20deg);
-    margin-top: 1rem;
   }
 }
