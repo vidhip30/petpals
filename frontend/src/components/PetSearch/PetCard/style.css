@@ -1,0 +1,266 @@
+* {
+  font-family: Poppins, sans-serif;
+}
+
+body {
+  background-color: #f8f6f2 !important;
+}
+
+.cardgrid{
+    display: grid;
+}
+
+.navbar {
+  background: #333973;
+  color: #f8f6f2;
+}
+
+#brand-logo {
+  width: 35px;
+  height: 35px;
+  transform: rotate(-25deg);
+}
+
+#brand-name {
+  color: #fff;
+  font-family: "Luckiest Guy", sans-serif;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 3.5rem;
+}
+
+header {
+  overflow-x: hidden;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3.5rem;
+  background: #333973;
+}
+
+#profile-widget {
+  gap: 15px;
+}
+
+#profile-frame {
+  border-radius: 45px;
+  overflow: hidden;
+}
+
+#profile-pic {
+  width: 45px;
+  height: 45px;
+}
+
+@media screen and (max-width: 450px) {
+  #username {
+    display: none;
+  }
+}
+
+main {
+  overflow-x: scroll;
+}
+
+a.adopt-button {
+  text-decoration: none;
+}
+
+#page {
+  min-height: 100vh;
+  background: #f8f6f2;
+}
+
+.custom-img {
+  max-width: 200px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+.card {
+  padding-top: 40px;
+}
+
+.large-text {
+  font-family: Poppins, sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 66px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #333973;
+}
+
+.stars {
+  margin-left: 10px;
+}
+
+.checked {
+  color: orange;
+}
+
+.breed {
+  margin-bottom: 0;
+}
+
+.age {
+  margin-right: 40px;
+}
+
+.bg-custom-color {
+  background-color: #333973;
+}
+
+.pet-link {
+  text-decoration: none;
+  color: black;
+}
+
+.pet-link:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  text-decoration: underline;
+}
+
+.star-rating[type="head"] {
+  font-size: 2em;
+  margin-top: 20px;
+}
+
+.submit-button {
+  float: right;
+  background-color: #333973 !important;
+  color: #fff;
+  border: 1px solid #fff !important;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.submit-button:hover {
+  background-color: #1f2244 !important;
+}
+
+.adopt-button {
+  background-color: #333973 !important;
+  color: #fff;
+  border: 1px solid #fff !important;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #1f2244 !important;
+}
+
+form {
+  display: block;
+  max-width: 700px;
+  margin: 15px auto 0;
+  background-color: white;
+}
+
+#petInfoModal {
+  top: 10%;
+}
+
+#form-summary {
+  background-color: inherit;
+}
+
+#form-title {
+  font-weight: 700;
+  text-align: center;
+}
+
+#submit {
+  background-color: #333973;
+  opacity: 77%;
+  display: block;
+  margin: 0 auto;
+}
+#submit:hover {
+  opacity: 100%;
+}
+
+.question {
+  font-size: large;
+  margin-bottom: 0.5rem;
+}
+
+.field {
+  margin: 1rem 0;
+}
+
+.adopt-button:hover {
+  background-color: black !important;
+}
+
+textarea {
+  resize: none !important;
+}
+
+.search-button {
+  background-color: #333973 !important;
+}
+
+.search-button:hover {
+  border-color: #6e6e6e !important;
+  background-color: #6e6e6e !important;
+}
+
+.search-button:active {
+  border-color: #4c54ae !important;
+  background-color: #4c54ae !important;
+}
+
+#search-icon {
+  width: 30px;
+  height: 30px;
+}
+
+@media screen and (max-width: 700px) {
+  #signup-form {
+    width: 100%;
+    padding: 1rem !important;
+  }
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background: #333973 !important;
+}
+
+.notify-pic {
+  width: 60px;
+}
+
+.image-frame {
+  border: 2px solid black;
+  border-radius: 45px;
+  overflow: hidden;
+}
+
+#reply-form {
+  background-color: inherit;
+}
+
+.adopt-button-grey{
+  color: gainsboro;
+}

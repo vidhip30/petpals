@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignupPage } from "./components/accounts/SignupPage";
+import PetSearchPage from './components/PetSearch';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="accounts">
             <Route path="signup" element={<SignupPage />}></Route>
           </Route>
+          <Route path="petlistings" element={<PetSearchPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
