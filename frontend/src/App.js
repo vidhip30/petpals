@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
 import { PetCreatePage } from "./pages/petListings/PetCreatePage";
 import { PageNotFound } from "./pages/misc/PageNotFound";
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<Landing />} />
           <Route path="accounts">
             <Route path="signup" element={<SignupPage />}></Route>
+            <Route path="login" element={<LoginPage />}></Route>
           </Route>
           <Route path="shelters">
             <Route path="create-pet" element={<PetCreatePage />}></Route>
