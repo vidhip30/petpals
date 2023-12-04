@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import PetCard from "./PetCard";
 import { useSearchParams } from "react-router-dom";
-import Form from 'react-bootstrap/Form'
+
 // import './style.css';
 
 
@@ -45,24 +45,28 @@ function PetSearchPage() {
     }, [ query ]);
 
     return <>
-        <div className="checkbox-group">
-            <p>Status:</p>
-            {['Available','Pending','Withdrawn','Adopted'].map(status => (
-                <label>
-                    {status}<input type="checkbox" 
-                    onChange={event => { 
-                        if (event.target.checked) { 
-                            setSearchParams(...query, {status: [...query.status, status], page: 1});
-                        } else {
-                            setSearchParams(...query, {status: query.status.filter(y => y !== status), page: 1});
-                        }
-                    }}
-                    checked={query.status.includes(status)} />
-                </label>
-            ))}
-        </div>
+       <div className="checkbox-group">
+    <p>Status:</p>
+    {['available', 'pending', 'withdrawn', 'adopted'].map(status => (
+        <label key={status}>
+            {status}
+            <input
+                type="checkbox"
+                onChange={event => {
+                    if (event.target.checked) {
+                        setSearchParams({ ...query, status: [...query.status, status], page: 1 });
+                    } else {
+                        setSearchParams({ ...query, status: query.status.filter(y => y !== status), page: 1 });
+                    }
+                }}
+                checked={query.status.includes(status)}
+            />
+        </label>
+    ))}
+</div>
 
-        <div className="radio-group2">
+
+        <div className="radio-group">
             <p>Gender:</p>
             {['female','male'].map(gender => (
                 <label>

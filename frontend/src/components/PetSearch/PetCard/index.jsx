@@ -2,9 +2,40 @@ import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 
 function PetCard({ pets }) {
+  const [shelters, setShelters] = useState({});
+  
+  useEffect(() => {
+    const fetchShelterData = async () => {
+      try {
+        
+        const shelterPromises = pets.map(async (pet) => {
+          const response = 'await fetch(`http://127.0.0.1:8000/accounts/shelter/${pet.shelter}`);'
+          const json = await response.json();
+          return { [pet.shelter]: json.name }; // Assuming each pet has a unique ID
+        });
+
+        const shelterDataArray = await Promise.all(shelterPromises);
+        
+       
+        const mergedShelterData = shelterDataArray.reduce((acc, data) => ({ ...acc, ...data }), {});
+
+      
+        setShelters(mergedShelterData);
+      } catch (error) {
+        console.error('Error fetching shelter name:', error);
+      }
+    };
+
+    fetchShelterData();
+  }, [pets]);
+
+ 
+
+
   if (!pets || !Array.isArray(pets)) {
     return null;
   }
@@ -12,7 +43,7 @@ function PetCard({ pets }) {
   return (
     <Row>
       {pets.map((pet, index) => (
-        <Col key={index} md={4} lg={3} sm={6} className="cardgrid">
+        <Col key={index} md={4} lg={3} sm={6}>
           <Card className="mb-4">
             <div className="img-container">
               {/* <img
@@ -39,7 +70,14 @@ function PetCard({ pets }) {
                 <div>
                   <p className="card-text">
                     <Link to={`./shelter/${pet.shelter}`} className="pet-link">
-                      Shelter: {pet.shelter}
+
+                   
+           
+
+
+
+
+                      Shelter: {shelters[pet.shelter]}
                     </Link>
                   </p>
                 </div>
@@ -62,3 +100,4 @@ function PetCard({ pets }) {
 }
 
 export default PetCard;
+

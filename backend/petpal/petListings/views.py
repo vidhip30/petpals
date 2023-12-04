@@ -51,7 +51,7 @@ class PetListingsList(ListAPIView):
     def get_queryset(self):
         shelter_id = self.request.GET.getlist('shelter')
         search = self.request.GET.getlist('search')
-        status = self.request.GET.get('status')
+        status = self.request.GET.getlist('status')
         breed = self.request.GET.get('breed')
         gender = self.request.GET.get('gender')
         sort_by = self.request.GET.getlist('sort_by')
@@ -65,7 +65,7 @@ class PetListingsList(ListAPIView):
             if shelter:
                 listings = listings.filter(shelter__in=shelter)
         if status and status in ['adopted', 'pending', 'withdrawn']:
-            listings = listings.filter(status=status)
+            listings = listings.filter(status__in=status)
         elif status == 'all':
             pass
         else:
