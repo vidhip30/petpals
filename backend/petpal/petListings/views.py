@@ -49,9 +49,9 @@ class PetListingsList(ListAPIView):
 
     def get_queryset(self):
         shelter_id = self.request.GET.getlist('shelter')
-        search = self.request.GET.getlist('search')
+        search = self.request.GET.get('search')
         status = self.request.GET.getlist('status')
-        breed = self.request.GET.get('breed')
+        breed = self.request.GET.getlist('breed')
         gender = self.request.GET.get('gender')
         sort_by = self.request.GET.getlist('sort_by')
         listings = PetListing.objects.all()
@@ -63,15 +63,16 @@ class PetListingsList(ListAPIView):
             shelter = Shelter.objects.filter(pk__in=shelter_id)
             if shelter:
                 listings = listings.filter(shelter__in=shelter)
-        if status and status in ['adopted', 'pending', 'withdrawn']:
-            listings = listings.filter(status__in=status)
-        elif status == 'all':
-            pass
-        else:
-            listings = listings.filter(status='available')
+        if status:
+            valid_statuses = []
+            for s in status:
+                if s in ['adopted', 'pending', 'withdrawn','available']:
+                    valid_statuses.append(s)
+            listings = listings.filter(status__in=valid_statuses)
+        
 
         if breed:
-            listings = listings.filter(breed=breed)
+            listings = listings.filter(breed__in=breed)
         if gender and gender in ['female', 'male']:
             listings = listings.filter(gender=gender)
         if sort_by:

@@ -2,42 +2,17 @@ import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import React, { useState, useEffect } from 'react';
 import './style.css';
 
-function PetCard({ pets }) {
-  const [shelters, setShelters] = useState({});
+function PetCard({ pets, shelterNames }) {
   
-  useEffect(() => {
-    const fetchShelterData = async () => {
-      try {
-        
-        const shelterPromises = pets.map(async (pet) => {
-          const response = 'await fetch(`http://127.0.0.1:8000/accounts/shelter/${pet.shelter}`);'
-          const json = await response.json();
-          return { [pet.shelter]: json.name }; // Assuming each pet has a unique ID
-        });
 
-        const shelterDataArray = await Promise.all(shelterPromises);
-        
-       
-        const mergedShelterData = shelterDataArray.reduce((acc, data) => ({ ...acc, ...data }), {});
-
-      
-        setShelters(mergedShelterData);
-      } catch (error) {
-        console.error('Error fetching shelter name:', error);
-      }
-    };
-
-    fetchShelterData();
-  }, [pets]);
-
- 
-
-
-  if (!pets || !Array.isArray(pets)) {
-    return null;
+  if (!pets || !Array.isArray(pets) || pets.length === 0) {
+    return (
+      <div className="text-center mt-3">
+        <p>No results match your search!</p>
+      </div>
+    );
   }
 
   return (
@@ -69,15 +44,11 @@ function PetCard({ pets }) {
               <div className="d-flex">
                 <div>
                   <p className="card-text">
-                    <Link to={`./shelter/${pet.shelter}`} className="pet-link">
-
-                   
-           
+                    <Link to={`/shelter/${pet.shelter}`} className="pet-link">
 
 
 
-
-                      Shelter: {shelters[pet.shelter]}
+                      Shelter: {shelterNames[pet.shelter]}
                     </Link>
                   </p>
                 </div>
