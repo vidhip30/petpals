@@ -5,6 +5,7 @@ import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
 import { PetCreatePage } from "./pages/petListings/PetCreatePage";
 import { PageNotFound } from "./pages/misc/PageNotFound";
+import { ListSheltersPage } from "./pages/admin/ListSheltersPage";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route path="shelters">
             <Route path="create-pet" element={<PetCreatePage />}></Route>
+          </Route>
+          <Route path="admin">
+            <Route path="shelters" element={<ListSheltersPage />}></Route>
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Route>

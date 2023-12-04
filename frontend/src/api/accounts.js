@@ -1,3 +1,7 @@
+// TODO: replace with cookie when login is complete
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzODA2OTM3LCJpYXQiOjE3MDE2NDY5MzcsImp0aSI6Ijg0OTFjZTVlNjY2MzQ1ZWZhMzMxM2YyODBlMjg3Y2JkIiwidXNlcl9pZCI6MX0.MjT3qnWcD8mgZ_s21mdEYFEzIUso3sk2HHqWIqBte_g";
+
 export const registerPetSeeker = async (payload) => {
   const response = await fetch("http://127.0.0.1:8000/accounts/seeker/", {
     method: "POST",
@@ -52,4 +56,20 @@ export const registerShelter = async (payload) => {
   });
 
   return response;
+};
+
+export const listShelters = async (url) => {
+  if (url === undefined) {
+    url = "http://127.0.0.1:8000/accounts/shelter/";
+  }
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.json();
 };
