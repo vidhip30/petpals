@@ -16,8 +16,6 @@ export const LoginForm = () => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const { authenticated, setAuthenticated } = useContext(Context);
-
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
@@ -43,8 +41,6 @@ export const LoginForm = () => {
     const loginResult = await login({ username, password });
 
     if (loginResult.success) {
-      setAuthenticated(true);
-
       // Redirect to the index page upon successful login
       navigate("/");
     } else {

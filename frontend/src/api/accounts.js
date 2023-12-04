@@ -25,8 +25,9 @@ export const login = async (payload) => {
       const data = await response.json();
       const token = data.access;
 
-      // Store the token in localStorage
+      // Store user data in localStorage
       localStorage.setItem("accessToken", token);
+      localStorage.setItem("username", payload["username"]);
 
       // Return the token or any other relevant data
       return { success: true, token };

@@ -8,16 +8,14 @@ import { PageNotFound } from "./pages/misc/PageNotFound";
 import { ListSheltersPage } from "./pages/admin/ListSheltersPage";
 import { createContext, useState } from "react";
 import { ProtectedRoute } from "./components/authentication/ProtectedRoute";
+import { NavBar } from "./components/shared/NavBar";
+import { useAccountsContext } from "./hooks/useAccountsContext";
 
 export const Context = createContext();
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(
-    !!localStorage.getItem("accessToken"),
-  );
-
   return (
-    <Context.Provider value={{ authenticated, setAuthenticated }}>
+    <Context.Provider value={useAccountsContext()}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -26,25 +24,27 @@ function App() {
               <Route path="signup" element={<SignupPage />}></Route>
               <Route path="login" element={<LoginPage />}></Route>
             </Route>
-            <Route path="shelters">
-              <Route
-                path="create-pet"
-                element={
-                  <ProtectedRoute>
-                    <PetCreatePage />
-                  </ProtectedRoute>
-                }
-              ></Route>
-            </Route>
-            <Route path="admin">
-              <Route
-                path="shelters"
-                element={
-                  <ProtectedRoute>
-                    <ListSheltersPage />
-                  </ProtectedRoute>
-                }
-              ></Route>
+            <Route element={<NavBar />}>
+              <Route path="shelters">
+                <Route
+                  path="create-pet"
+                  element={
+                    <ProtectedRoute>
+                      <PetCreatePage />
+                    </ProtectedRoute>
+                  }
+                ></Route>
+              </Route>
+              <Route path="admin">
+                <Route
+                  path="shelters"
+                  element={
+                    <ProtectedRoute>
+                      <ListSheltersPage />
+                    </ProtectedRoute>
+                  }
+                ></Route>
+              </Route>
             </Route>
             <Route path="*" element={<PageNotFound />} />
           </Route>

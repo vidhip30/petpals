@@ -4,7 +4,7 @@ import { PageNotFound } from "../../pages/misc/PageNotFound";
 
 // Source: https://www.robinwieruch.de/react-router-private-routes/
 export const ProtectedRoute = ({ children }) => {
-  const { authenticated, setAuthenticated } = useContext(Context);
+  const { authenticated } = useContext(Context);
 
   if (!authenticated) {
     return <PageNotFound />;
