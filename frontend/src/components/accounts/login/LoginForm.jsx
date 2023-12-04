@@ -1,18 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../signup/Style.css";
 import { login } from "../../../api/accounts";
+import { Context } from "../../../App";
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const { authenticated, setAuthenticated } = useContext(Context);
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -39,17 +43,11 @@ export const LoginForm = () => {
     const loginResult = await login({ username, password });
 
     if (loginResult.success) {
+      setAuthenticated(true);
+
       // Redirect to the index page upon successful login
-      console.log("login success");
       navigate("/");
     } else {
-      // Handle login failure
-      console.error(
-        "Login failed:",
-        loginResult.error.status,
-        loginResult.error.message,
-      );
-
       // Update the state with the error message
       setValidated(true);
       setUsernameError("Invalid Username.");

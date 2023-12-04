@@ -1,32 +1,56 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
 import { PetCreatePage } from "./pages/petListings/PetCreatePage";
 import { PageNotFound } from "./pages/misc/PageNotFound";
 import { ListSheltersPage } from "./pages/admin/ListSheltersPage";
+import { createContext, useState } from "react";
+import { ProtectedRoute } from "./components/authentication/ProtectedRoute";
+
+export const Context = createContext();
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(
+    !!localStorage.getItem("accessToken"),
+  );
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index element={<Landing />} />
-          <Route path="accounts">
-            <Route path="signup" element={<SignupPage />}></Route>
-            <Route path="login" element={<LoginPage />}></Route>
+    <Context.Provider value={{ authenticated, setAuthenticated }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Landing />} />
+            <Route path="accounts">
+              <Route path="signup" element={<SignupPage />}></Route>
+              <Route path="login" element={<LoginPage />}></Route>
+            </Route>
+            <Route path="shelters">
+              <Route
+                path="create-pet"
+                element={
+                  <ProtectedRoute>
+                    <PetCreatePage />
+                  </ProtectedRoute>
+                }
+              ></Route>
+            </Route>
+            <Route path="admin">
+              <Route
+                path="shelters"
+                element={
+                  <ProtectedRoute>
+                    <ListSheltersPage />
+                  </ProtectedRoute>
+                }
+              ></Route>
+            </Route>
+            <Route path="*" element={<PageNotFound />} />
           </Route>
-          <Route path="shelters">
-            <Route path="create-pet" element={<PetCreatePage />}></Route>
-          </Route>
-          <Route path="admin">
-            <Route path="shelters" element={<ListSheltersPage />}></Route>
-          </Route>
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </Context.Provider>
   );
 }
 
