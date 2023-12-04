@@ -15,7 +15,7 @@
   opacity: 100%;
 }
 
-#brand-name {
+#brand-name-accounts {
   color: #fff;
   font-family: "Luckiest Guy", sans-serif;
   font-size: 60px !important;
@@ -109,8 +109,9 @@ span {
 }
 
 html,
-main {
-  background-color: #f8f6f2;
+main,
+body {
+  background-color: #f8f6f2 !important;
 }
 
 body,
@@ -129,11 +130,10 @@ html {
   margin-bottom: 28px;
 }
 
-form {
+.account-form {
   display: block;
   margin: 0 auto;
   width: 700px;
-  margin-top: 15px;
   background-color: white;
 }
 

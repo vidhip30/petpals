@@ -1,6 +1,7 @@
 from accounts.models import PetSeeker, Shelter
 from accounts.permissions import SeekerPermission, ShelterPermission
-from accounts.serializers import PetSeekerSerializer, ShelterSerializer
+from accounts.serializers import (CustomTokenObtainPairSerializer,
+                                  PetSeekerSerializer, ShelterSerializer)
 from applications.models import Application
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -8,6 +9,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.mixins import (CreateModelMixin, DestroyModelMixin,
                                    RetrieveModelMixin, UpdateModelMixin)
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 # Source:
 # https://www.django-rest-framework.org/api-guide/viewsets/#viewset
@@ -72,7 +74,11 @@ class PetSeekerViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, D
     def retrieve(self, request, *args, **kwargs):
         seeker = get_object_or_404(PetSeeker, id=kwargs.get('pk'))
 
-        # Request to retrieve must be for a seeker
+        # Request succeeds if user is getting info about themselves.
+        if seeker.id == request.user.id:
+            return super().retrieve(request, *args, **kwargs)
+
+        # Otherwise, request to retrieve must be for a seeker
         # with an active application for the logged-in shelter.
         user_apps_with_shelter = Application.objects.filter(
             user=seeker,
@@ -102,3 +108,8 @@ class PetSeekerViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, D
     )
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
+
+
+# Source: https://stackoverflow.com/a/76626345
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
