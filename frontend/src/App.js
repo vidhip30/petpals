@@ -1,15 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
 import { PetCreatePage } from "./pages/petListings/PetCreatePage";
 import { PageNotFound } from "./pages/misc/PageNotFound";
 import { ListSheltersPage } from "./pages/admin/ListSheltersPage";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { ProtectedRoute } from "./components/authentication/ProtectedRoute";
-import { NavBar } from "./components/shared/NavBar";
 import { useAccountsContext } from "./hooks/useAccountsContext";
+import { NavBar } from "./components/shared/NavBar";
 
 export const Context = createContext();
 
