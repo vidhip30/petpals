@@ -39,7 +39,7 @@ export const ProfilePageUser = () => {
 
   const handleUpload = async (event) => {
     const formData = new FormData();
-    formData.append("file", event.target.files[0]);
+    formData.append("profile_image", event.target.files[0]);
 
     await updateUserImage(userID, userType, formData);
   };

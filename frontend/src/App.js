@@ -11,6 +11,8 @@ import { ProtectedRoute } from "./components/authentication/ProtectedRoute";
 import { useAccountsContext } from "./hooks/useAccountsContext";
 import { NavBar } from "./components/shared/NavBar";
 import { ProfilePage } from "./pages/profile/ProfilePage";
+import { ShelterDetailPage } from "./pages/profile/ShelterDetailPage";
+import { SeekerDetailPage } from "./pages/profile/SeekerDetailPage";
 
 export const Context = createContext();
 
@@ -34,7 +36,11 @@ function App() {
                       <PetCreatePage />
                     </ProtectedRoute>
                   }
-                ></Route>
+                />
+                <Route path=":userID" element={<ShelterDetailPage />} />
+              </Route>
+              <Route path="seekers">
+                <Route path=":userID" element={<SeekerDetailPage />} />
               </Route>
               <Route path="profile" element={<ProfilePage />} />
               <Route path="admin">
@@ -45,7 +51,7 @@ function App() {
                       <ListSheltersPage />
                     </ProtectedRoute>
                   }
-                ></Route>
+                />
               </Route>
             </Route>
             <Route path="*" element={<PageNotFound />} />

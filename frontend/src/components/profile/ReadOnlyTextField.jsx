@@ -1,11 +1,9 @@
-export const TextField = ({
+export const ReadOnlyTextField = ({
   id,
   fieldName,
   label,
   placeholder,
   text,
-  setText,
-  handleUpdate,
 }) => {
   return (
     <div className="mt-3">
@@ -20,10 +18,7 @@ export const TextField = ({
         required
         value={text}
         name={fieldName}
-        onChange={(e) => {
-          setText(e.target.value);
-        }}
-        onBlur={handleUpdate}
+        readOnly
       />
     </div>
   );

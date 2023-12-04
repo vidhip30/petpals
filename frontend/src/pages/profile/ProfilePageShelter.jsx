@@ -42,7 +42,7 @@ export const ProfilePageShelter = () => {
 
   const handleUpload = async (event) => {
     const formData = new FormData();
-    formData.append("file", event.target.files[0]);
+    formData.append("profile_image", event.target.files[0]);
 
     await updateUserImage(userID, userType, formData);
   };
@@ -98,7 +98,7 @@ export const ProfilePageShelter = () => {
               handleUpdate={handleUpdate}
             />
             <div className="mt-3">
-              <label for="motto-field" className="form-label">
+              <label htmlFor="motto-field" className="form-label">
                 Mission Statement
               </label>
               <textarea

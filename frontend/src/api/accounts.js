@@ -128,5 +128,6 @@ export const getUser = async (userID, userType) => {
     localStorage.setItem("profile_pic_url", data["profile_image"]);
   }
 
+  data["status"] = response.status;
   return data;
 };
