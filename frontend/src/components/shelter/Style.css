@@ -1,0 +1,9 @@
+#listpettitle {
+  font-weight: 700;
+  color: #333973;
+}
+
+#listpettitle {
+  display: flex;
+  justify-content: center;
+}

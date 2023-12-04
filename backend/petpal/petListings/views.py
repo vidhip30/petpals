@@ -29,12 +29,11 @@ class PetListingsCreate(CreateAPIView):
         return super().post(request, *args, **kwargs)
 
     def perform_create(self, serializer):
-        shelter = get_object_or_404(Shelter, id=self.kwargs['pk'])
-        if self.request.user.username != shelter.username:
+        if Shelter.objects.filter(user_ptr=self.request.user).exists():
+            serializer.save(shelter = (Shelter.objects.filter(user_ptr=self.request.user)[0]))
+        else:
             raise PermissionDenied(
                 detail="You do not have permission to create this pet listing.")
-        else:
-            serializer.save(shelter=shelter)
 
 
 class PetListingsList(ListAPIView):

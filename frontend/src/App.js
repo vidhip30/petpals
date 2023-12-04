@@ -1,8 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { SignupPage } from "./components/accounts/SignupPage";
+
+
 import PetSearchPage from './components/PetSearch';
+import { LoginPage } from "./pages/accounts/LoginPage";
+import { SignupPage } from "./pages/accounts/SignupPage";
+import { PetCreatePage } from "./pages/petListings/PetCreatePage";
+import { PageNotFound } from "./pages/misc/PageNotFound";
+import { ListSheltersPage } from "./pages/admin/ListSheltersPage";
+
 
 function App() {
   return (
@@ -12,8 +19,19 @@ function App() {
           <Route index element={<Landing />} />
           <Route path="accounts">
             <Route path="signup" element={<SignupPage />}></Route>
+            <Route path="login" element={<LoginPage />}></Route>
           </Route>
+
           <Route path="petlistings" element={<PetSearchPage />}></Route>
+
+          <Route path="shelters">
+            <Route path="create-pet" element={<PetCreatePage />}></Route>
+          </Route>
+          <Route path="admin">
+            <Route path="shelters" element={<ListSheltersPage />}></Route>
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

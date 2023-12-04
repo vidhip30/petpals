@@ -1,10 +1,14 @@
+import {
+  TextField,
+  validateEmail,
+  validatePlaintext,
+} from "../../shared/TextField";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { TextField, validatePlaintext, validateEmail } from "./TextField";
-import { PasswordField } from "./PasswordField";
 import { useEffect, useState } from "react";
+import { PasswordField } from "./PasswordField";
 
-export const ShelterFormBody = () => {
+export const SeekerFormBody = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -21,13 +25,26 @@ export const ShelterFormBody = () => {
 
   return (
     <>
-      <TextField
-        fieldName="name"
-        placeholder="Pet shelter name"
-        type="text"
-        errorMessage={"Please enter a name."}
-        validate={validatePlaintext}
-      />
+      <div className="row">
+        <div className="col">
+          <TextField
+            fieldName="first_name"
+            placeholder="First name"
+            type="text"
+            errorMessage={"Please enter your first name."}
+            validate={validatePlaintext}
+          />
+        </div>
+        <div className="col">
+          <TextField
+            fieldName="last_name"
+            placeholder="Last name"
+            type="text"
+            errorMessage={"Please enter your last name."}
+            validate={validatePlaintext}
+          />
+        </div>
+      </div>
       <TextField
         fieldName="email"
         placeholder="Email"
@@ -68,7 +85,7 @@ export const ShelterFormBody = () => {
         type="submit"
         value="Create Account"
       >
-        Submit
+        Create Account
       </Button>
     </>
   );
