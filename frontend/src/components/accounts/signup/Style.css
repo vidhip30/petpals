@@ -143,6 +143,14 @@ html {
   margin-top: 80px;
 }
 
+.invalid-form-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 1.2rem;
+  color: var(--bs-form-invalid-color);
+  text-align: center;
+}
+
 @media screen and (max-width: 550px) {
   #loginform {
     width: 80%;

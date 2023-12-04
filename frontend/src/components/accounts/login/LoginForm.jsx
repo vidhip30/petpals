@@ -102,7 +102,6 @@ export const LoginForm = () => {
       >
         Submit
       </Button>
-
       {/* Link to register */}
       <p id="haveacc">
         Don't have an account?&nbsp;

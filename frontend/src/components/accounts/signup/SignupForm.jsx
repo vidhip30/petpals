@@ -5,11 +5,14 @@ import "./Style.css";
 import { useState } from "react";
 import { SeekerFormBody } from "./SeekerFormBody";
 import { registerPetSeeker, registerShelter } from "../../../api/accounts";
+import { useNavigate } from "react-router-dom";
 
 // Source: https://react-bootstrap.netlify.app/docs/forms/validation
 export const SignupForm = () => {
+  const navigate = useNavigate();
   const [accountType, setAccountType] = useState("Pet Shelter");
   const [validated, setValidated] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -37,9 +40,11 @@ export const SignupForm = () => {
     }
 
     if (response.status === 201) {
-      console.log("Registration successful!");
+      navigate("/accounts/login");
+    } else if (response.status === 400) {
+      setErrorMsg("Username is already taken");
     } else {
-      console.log("Error with registration!");
+      setErrorMsg("Unknown error occurred");
     }
   };
 
@@ -63,6 +68,7 @@ export const SignupForm = () => {
       <hr className="hr" />
       {accountType === "Pet Seeker" && <SeekerFormBody />}
       {accountType === "Pet Shelter" && <ShelterFormBody />}
+      <p class="invalid-form-feedback">{errorMsg}</p>
       <p id="haveacc">
         Already have an account?&nbsp;
         <a id="loginlink" href="login.html">
