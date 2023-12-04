@@ -57,7 +57,7 @@ export const LoginForm = () => {
 
   return (
     <Form
-      className="p-5 pt-0 border rounded shadow-sm needs-validation"
+      className="account-form p-5 pt-0 border rounded shadow-sm needs-validation"
       id="loginform"
       noValidate
       validated={validated}

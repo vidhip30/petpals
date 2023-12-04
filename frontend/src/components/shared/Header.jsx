@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Context } from "../../App";
 
 export const Header = () => {
-  const { username, profile_pic_url } = useContext(Context);
+  const { username, profilePicURL } = useContext(Context);
 
   return (
     <header>
@@ -38,7 +38,7 @@ export const Header = () => {
             </button>
             <span id="username">{username}</span>
             <div id="profile-frame">
-              <img id="profile-pic" src={profile_pic_url} alt="Profile image" />
+              <img id="profile-pic" src={profilePicURL} alt="Profile image" />
             </div>
           </div>
         </div>

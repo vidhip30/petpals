@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 export const Footer = () => {
   return (
     <footer className="d-flex justify-content-end align-items-center px-3 gap-3">
-      <a className="link-light" href="../profile-update/profile-user.html">
+      <Link to="/profile" className="link-light">
         Profile
-      </a>
+      </Link>
       <a className="link-light" href="application-summary-user.html">
         Applications
       </a>

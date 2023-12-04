@@ -1,6 +1,8 @@
-from rest_framework.serializers import ModelSerializer, CharField, ValidationError
-from accounts.models import PetSeeker, User, Shelter
+from accounts.models import PetSeeker, Shelter, User
 from django.contrib.auth.hashers import make_password
+from rest_framework.serializers import (CharField, ModelSerializer,
+                                        ValidationError)
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 # Sources:
 # https://stackoverflow.com/questions/49189484/how-to-mention-password-field-in-serializer
@@ -42,10 +44,26 @@ class UserSerializer(ModelSerializer):
 class ShelterSerializer(UserSerializer):
     class Meta():
         model = Shelter
-        fields = UserSerializer.Meta.fields + ['name']
+        fields = UserSerializer.Meta.fields + ['name', 'mission_statement']
 
 
 class PetSeekerSerializer(UserSerializer):
     class Meta():
         model = PetSeeker
         fields = UserSerializer.Meta.fields + ['first_name', 'last_name']
+
+
+# Source: https://stackoverflow.com/a/76626345
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        user = self.user
+        data["user_id"] = user.id
+
+        if Shelter.objects.filter(id=user.id).exists():
+            data["user_type"] = "shelter"
+        elif PetSeeker.objects.filter(id=user.id).exists():
+            data["user_type"] = "seeker"
+
+        return data

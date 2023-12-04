@@ -15,6 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from accounts.views import PetSeekerViewSet, ShelterViewSet
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from drf_yasg import openapi
@@ -52,7 +54,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('comments/',include('comments.urls')),
+    path('comments/', include('comments.urls')),
     path('', include(router.urls)),
     path('', include(seeker_router.urls)),
     path('', include(shelter_router.urls)),
@@ -63,3 +65,5 @@ urlpatterns = [
     path('swagger-ui/', schema_view.with_ui('swagger',
          cache_timeout=0), name='schema-swagger-ui'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,6 +10,7 @@ import { createContext } from "react";
 import { ProtectedRoute } from "./components/authentication/ProtectedRoute";
 import { useAccountsContext } from "./hooks/useAccountsContext";
 import { NavBar } from "./components/shared/NavBar";
+import { ProfilePage } from "./pages/profile/ProfilePage";
 
 export const Context = createContext();
 
@@ -35,6 +36,7 @@ function App() {
                   }
                 ></Route>
               </Route>
+              <Route path="profile" element={<ProfilePage />} />
               <Route path="admin">
                 <Route
                   path="shelters"
