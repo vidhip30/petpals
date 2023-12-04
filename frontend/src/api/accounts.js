@@ -1,7 +1,3 @@
-// TODO: replace with cookie when login is complete
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzODA2OTM3LCJpYXQiOjE3MDE2NDY5MzcsImp0aSI6Ijg0OTFjZTVlNjY2MzQ1ZWZhMzMxM2YyODBlMjg3Y2JkIiwidXNlcl9pZCI6MX0.MjT3qnWcD8mgZ_s21mdEYFEzIUso3sk2HHqWIqBte_g";
-
 export const registerPetSeeker = async (payload) => {
   const response = await fetch("http://127.0.0.1:8000/accounts/seeker/", {
     method: "POST",
@@ -37,12 +33,18 @@ export const login = async (payload) => {
     } else {
       // Return the error status and message
       const errorData = await response.json();
-      return { success: false, error: { status: response.status, message: errorData.detail } };
+      return {
+        success: false,
+        error: { status: response.status, message: errorData.detail },
+      };
     }
   } catch (error) {
     // Handle other issues
     console.error("Login error:", error.message);
-    return { success: false, error: { status: 500, message: "Internal Server Error" } };
+    return {
+      success: false,
+      error: { status: 500, message: "Internal Server Error" },
+    };
   }
 };
 
@@ -67,7 +69,7 @@ export const listShelters = async (url) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   });
 
