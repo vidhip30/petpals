@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-
 import PetSearchPage from "./pages/search";
 import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
@@ -19,9 +18,8 @@ import { SeekerDetailPage } from "./pages/profile/SeekerDetailPage";
 
 export const Context = createContext();
 
-
 function App() {
-  return ( 
+  return (
     <Context.Provider value={useAccountsContext()}>
       <BrowserRouter>
         <Routes>
@@ -64,7 +62,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Context.Provider>
-
   );
 }
 
