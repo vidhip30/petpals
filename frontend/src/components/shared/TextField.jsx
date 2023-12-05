@@ -7,8 +7,9 @@ export const TextField = ({
   type,
   errorMessage,
   validate,
+  prevValue
 }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(prevValue) !== undefined ? prevValue : "");
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 

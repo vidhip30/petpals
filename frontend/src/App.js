@@ -4,6 +4,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
 import { PetCreatePage } from "./pages/petListings/PetCreatePage";
+import { PetUpdatePage } from "./pages/petListings/PetUpdatePage";
 import { PageNotFound } from "./pages/misc/PageNotFound";
 import { ListSheltersPage } from "./pages/admin/ListSheltersPage";
 import { createContext, useState } from "react";
@@ -30,9 +31,15 @@ function App() {
               <Route
                 path="create-pet"
                 element={
-                  <ProtectedRoute>
+              
                     <PetCreatePage />
-                  </ProtectedRoute>
+                  
+                }
+              ></Route>
+              <Route
+                path="update-pet"
+                element={
+                    <PetUpdatePage />
                 }
               ></Route>
             </Route>

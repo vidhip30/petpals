@@ -4,12 +4,14 @@ import { DropdownField } from "./DropdownField";
 import { DescriptionField } from "./DescriptionField";
 import { ImageField } from "./ImageField";
 
-export const PetCreateFormBody = () => {
+export const PetUpdateFormBody = ({ formInfo }) => {
   const size_options = [
     { value: 1, label: "Small" },
     { value: 2, label: "Medium" },
     { value: 3, label: "Big" },
   ];
+
+  console.log(formInfo.name);
 
   const gender_options = [
     { value: "male", label: "Male" },
@@ -22,7 +24,7 @@ export const PetCreateFormBody = () => {
     { value: "pending", label: "Pending" },
     { value: "withdrawn", label: "Withdrawn" },
   ];
-
+  
   return (
     <>
       <div className="row">
@@ -31,6 +33,7 @@ export const PetCreateFormBody = () => {
             fieldName="name"
             placeholder="Pet name"
             type="text"
+            prevValue = {formInfo.name}
             errorMessage={"Please enter the pet's name."}
             validate={validatePlaintext}
           />
@@ -40,6 +43,7 @@ export const PetCreateFormBody = () => {
             fieldName="breed"
             placeholder="Breed"
             type="text"
+            prevValue = {formInfo.breed}
             errorMessage={"Please enter the pet's breed."}
             validate={validatePlaintext}
           />
@@ -51,6 +55,7 @@ export const PetCreateFormBody = () => {
             fieldName="size"
             placeholder="Select Size"
             options={size_options}
+            prevValue = {formInfo.size}
             errorMessage="Please select a pet size."
             validate={(value) => value !== ""}
           />
@@ -60,6 +65,7 @@ export const PetCreateFormBody = () => {
             fieldName="gender"
             placeholder="Select Gender"
             options={gender_options}
+            prevValue = {formInfo.gender}
             errorMessage="Please select a gender."
             validate={(value) => value !== ""}
           />
@@ -71,6 +77,7 @@ export const PetCreateFormBody = () => {
             fieldName="age"
             placeholder="Age"
             type="number"
+            prevValue = {formInfo.age}
             errorMessage="Please enter a valid age."
             validate={(value) =>
               Number.isInteger(Number(value)) && Number(value) >= 0
@@ -82,6 +89,7 @@ export const PetCreateFormBody = () => {
             fieldName="status"
             placeholder="Select Status"
             options={status_options}
+            prevValue = {formInfo.status}
             errorMessage="Please select a status."
             validate={(value) => value !== ""}
           />
@@ -91,6 +99,7 @@ export const PetCreateFormBody = () => {
         fieldName="description"
         placeholder="Description"
         rows={4} // Set the number of rows you desire
+        prevValue = {formInfo.description}
         errorMessage="Please enter a description."
         validate={(value) => value.trim() !== ""}
       />
@@ -98,6 +107,7 @@ export const PetCreateFormBody = () => {
         fieldName="picture"
         label="pet-picture"
         accept="image/*"
+        prevValue = {formInfo.picture}
         errorMessage="Please upload a valid image."
         validate={() => true}
       />
@@ -105,9 +115,9 @@ export const PetCreateFormBody = () => {
         id="create"
         className="mb-3 mt-4 btn btn-secondary"
         type="submit"
-        value="pet_listed"
+        value="pet_updated"
       >
-        List Pet
+        Update Pet
       </Button>
     </>
   );
