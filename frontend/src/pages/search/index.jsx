@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import PetCard from "./PetCard";
+import PetCard from "../../components/PetSearch/PetCard";
 import { useSearchParams } from "react-router-dom";
 import Select from "react-select"; // Import the Select component
 import Button from 'react-bootstrap/Button';
