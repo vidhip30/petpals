@@ -52,7 +52,7 @@ class PetListingsList(ListAPIView):
         search = self.request.GET.get('search')
         status = self.request.GET.getlist('status')
         breed = self.request.GET.getlist('breed')
-        gender = self.request.GET.get('gender')
+        gender = self.request.GET.getlist('gender')
         sort_by = self.request.GET.getlist('sort_by')
         listings = PetListing.objects.all()
 
@@ -73,8 +73,14 @@ class PetListingsList(ListAPIView):
 
         if breed:
             listings = listings.filter(breed__in=breed)
-        if gender and gender in ['female', 'male']:
-            listings = listings.filter(gender=gender)
+        if gender:
+            valid_genders = []
+            for g in gender:
+                if g in ['female', 'male']:
+                    valid_genders.append(g)
+            listings = listings.filter(gender__in=valid_genders)
+        
+           
         if sort_by:
             sort_by_val = []
             for s in sort_by:

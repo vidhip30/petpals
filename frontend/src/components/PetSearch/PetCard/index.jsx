@@ -16,16 +16,16 @@ function PetCard({ pets, shelterNames }) {
   }
 
   return (
-    <Row>
+    <Row className='cardrow'>
       {pets.map((pet, index) => (
         <Col key={index} md={4} lg={3} sm={6}>
-          <Card className="mb-4">
+          <Card className="mb-4 ">
             <div className="img-container">
-              {/* <img
-                src="/images/dog-temp.jpg"
+              <img
+                src={`${pet.picture}`}
                 className="card-img-top custom-img"
-                alt="Image-Dog"
-              /> */}
+                alt="Image-pet"
+              />
             </div>
             <div className="text-center mt-1">
               <Link
@@ -44,7 +44,7 @@ function PetCard({ pets, shelterNames }) {
               <div className="d-flex">
                 <div>
                   <p className="card-text">
-                    <Link to={`/shelter/${pet.shelter}`} className="pet-link">
+                    <Link to={`/shelters/${pet.shelter}`} className="pet-link">
 
 
 
