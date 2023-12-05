@@ -6,6 +6,8 @@ from rest_framework.generics import (CreateAPIView, ListAPIView,
                                      RetrieveUpdateDestroyAPIView)
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 
 from .models import PetListing
 from .serializers import PetListingSerializer
@@ -93,7 +95,10 @@ class ListingsRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         operation_summary='Get petlisting by ID',
     )
     def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+        instance = self.get_object()
+
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
     def get_object(self):
         return get_object_or_404(PetListing, id=self.kwargs['pk'])
@@ -102,29 +107,56 @@ class ListingsRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         operation_summary='Update pet listing by ID',
     )
     def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        if self.request.user.id != instance.shelter.id:
+            raise PermissionDenied(
+                detail="You do not have permission to update this pet listing."
+            )
+
         return super().put(request, *args, **kwargs)
 
     @swagger_auto_schema(
         operation_summary='Partially update pet listing by ID',
     )
     def patch(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        if self.request.user.id != instance.shelter.id:
+            raise PermissionDenied(
+                detail="You do not have permission to partially update this pet listing."
+            )
+
         return super().patch(request, *args, **kwargs)
 
     def perform_update(self, serializer):
-        if self.request.user.username != serializer.instance.shelter.username:
+        instance = self.get_object()
+        
+        if self.request.user.username != instance.shelter.username:
             raise PermissionDenied(
-                detail="You do not have permission to update this pet listing.")
-        else:
-            return super().perform_update(serializer)
+                detail="You do not have permission to update this pet listing."
+            )
+
+        serializer.save()
 
     @swagger_auto_schema(
         operation_summary='Delete pet listing by ID',
     )
     def delete(self, request, *args, **kwargs):
-        return super().delete(request, *args, **kwargs)
+        instance = self.get_object()
 
+        if self.request.user.id != instance.shelter.id:
+            raise PermissionDenied(
+                detail="You do not have permission to delete this pet listing."
+            )
+
+        # Perform the delete
+        return super().delete(request, *args, **kwargs)
+    
     def perform_destroy(self, instance):
         if self.request.user.username != instance.shelter.username:
             raise PermissionDenied(
-                detail="You do not have permission to delete this pet listing.")
-        return super().perform_destroy(instance)
+                detail="You do not have permission to delete this pet listing."
+            )
+
+        instance.delete()
