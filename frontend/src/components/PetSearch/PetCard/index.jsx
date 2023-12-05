@@ -29,9 +29,7 @@ function PetCard({ pets, shelterNames }) {
             </div>
             <div className="text-center mt-1">
               <Link
-                type="button"
-                className="pet-link"
-                data-bs-toggle="modal"
+                to={`/shelters/${pet.shelter}/petlistings/${pet.id}`}
                 data-bs-target="#petInfoModal"
               >
                 <Card.Title>
