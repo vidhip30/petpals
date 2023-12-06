@@ -33,7 +33,7 @@ export const DropdownField = ({
           {placeholder}
         </option>
         {options.map((option, index) => (
-          <option selected = {value === option.value} key={index} value={option.value}>
+          <option key={index} value={option.value}>
             {option.label}
           </option>
         ))}

@@ -9,7 +9,7 @@ import { getPetListing } from "../../api/shelter";
 export const PetUpdateForm = ({listingId, formInfo, setFormInfo}) => {
   const [validated, setValidated] = useState(false);
   //const [rendered, setrendered] = useState(true);
-  console.log(formInfo);
+
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;

@@ -19,14 +19,11 @@ export const PetUpdatePage = () => {
     const fetchInitialPetListing = async () => {
         const response = await getPetListing(listingId);
         const petData = await response.json();
-        console.log(petData);
         setFormInfo(petData);
     };
     useEffect(() => {
         fetchInitialPetListing();
-        console.log("hi")
     }, []);
-    console.log(formInfo);
   return (
     <>
       <div>

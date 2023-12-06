@@ -12,7 +12,6 @@ export const PetUpdateFormBody = ({ formInfo , setFormInfo}) => {
     { value: 3, label: "Big" },
   ];
 
-  console.log(formInfo.name);
 
   const gender_options = [
     { value: "male", label: "Male" },
