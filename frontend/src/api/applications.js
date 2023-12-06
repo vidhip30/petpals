@@ -1,3 +1,18 @@
+export const getApplication = async (applicationID) => {
+  const response = await fetch(
+    `http://127.0.0.1:8000/pet_listings/applications/${applicationID}/`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+
+  return response.json();
+};
+
 export const getPetListingName = async (listingId) => {
   const url = `http://127.0.0.1:8000/petlistings/${listingId}/`;
 
@@ -19,7 +34,7 @@ export const getPetListingName = async (listingId) => {
       console.error(
         "Failed to fetch pet listing:",
         response.status,
-        response.statusText,
+        response.statusText
       );
       return null;
     }
@@ -48,7 +63,7 @@ export const createApplication = async (listingID, payload) => {
       console.error(
         "Failed to fetch pet listing:",
         response.status,
-        response.statusText,
+        response.statusText
       );
       return null;
     }
