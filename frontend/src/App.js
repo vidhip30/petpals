@@ -15,6 +15,7 @@ import { NavBar } from "./components/shared/NavBar";
 import { ProfilePage } from "./pages/profile/ProfilePage";
 import { ShelterDetailPage } from "./pages/profile/ShelterDetailPage";
 import { SeekerDetailPage } from "./pages/profile/SeekerDetailPage";
+import { CreatePage } from "./pages/applications/CreatePage";
 
 export const Context = createContext();
 
@@ -56,6 +57,16 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <ListSheltersPage />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
+              <Route path="applications">
+                <Route
+                  path="create/:petID"
+                  element={
+                    <ProtectedRoute>
+                      <CreatePage />
                     </ProtectedRoute>
                   }
                 />
