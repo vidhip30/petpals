@@ -38,7 +38,7 @@ export const PetUpdatePage = () => {
         </button>
         <img id="logo" src="/images/paw.png" alt="PetPal logo" width="50px" />
       </div>
-      <PetUpdateForm listingId = {listingId} formInfo = {formInfo}/>
+      <PetUpdateForm listingId = {listingId} formInfo = {formInfo} setFormInfo = {setFormInfo}/>
     </>
   );
 };

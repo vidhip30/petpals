@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { updatePetListing } from "../../api/shelter";
 
 export const ImageField = ({
   fieldName,
@@ -6,26 +7,30 @@ export const ImageField = ({
   errorMessage,
   accept,
   validate,
+  update,
+  value
 }) => {
-  const [file, setFile] = useState(null);
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
   const handleFileChange = (e) => {
+    //const selectedFile = e.target.files[0];
     const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-    setIsValid(validate(file));
+    update(selectedFile);
+    setIsValid(validate(selectedFile));
     setIsChanged(true);
   };
 
   return (
     <div>
+      {value && <img src={value} alt="Current Pet" />}
       <input
         type="file"
         className="form-field mt-3"
         name={fieldName}
         accept={accept}
         onChange={handleFileChange}
+        
       />
       {!isValid && isChanged && <p>{errorMessage}</p>}
     </div>

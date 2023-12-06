@@ -3,8 +3,9 @@ import Button from "react-bootstrap/Button";
 import { DropdownField } from "./DropdownField";
 import { DescriptionField } from "./DescriptionField";
 import { ImageField } from "./ImageField";
+import { SimpleTextField } from "../shared/SimpleTextField";
 
-export const PetUpdateFormBody = ({ formInfo }) => {
+export const PetUpdateFormBody = ({ formInfo , setFormInfo}) => {
   const size_options = [
     { value: 1, label: "Small" },
     { value: 2, label: "Medium" },
@@ -29,23 +30,25 @@ export const PetUpdateFormBody = ({ formInfo }) => {
     <>
       <div className="row">
         <div className="col">
-          <TextField
+          <SimpleTextField
             fieldName="name"
             placeholder="Pet name"
             type="text"
-            prevValue = {formInfo.name}
+            value = {formInfo.name}
             errorMessage={"Please enter the pet's name."}
             validate={validatePlaintext}
+            update = {(e) => setFormInfo({...formInfo, name: e.target.value})}
           />
         </div>
         <div className="col">
-          <TextField
+          <SimpleTextField
             fieldName="breed"
             placeholder="Breed"
             type="text"
-            prevValue = {formInfo.breed}
+            value = {formInfo.breed}
             errorMessage={"Please enter the pet's breed."}
             validate={validatePlaintext}
+            update = {(e) => setFormInfo({...formInfo, breed: e.target.value})}
           />
         </div>
       </div>
@@ -55,9 +58,10 @@ export const PetUpdateFormBody = ({ formInfo }) => {
             fieldName="size"
             placeholder="Select Size"
             options={size_options}
-            prevValue = {formInfo.size}
+            value = {formInfo.size}
             errorMessage="Please select a pet size."
             validate={(value) => value !== ""}
+            update = {(e) => setFormInfo({...formInfo, size: e.target.value})}
           />
         </div>
         <div className="col">
@@ -65,23 +69,25 @@ export const PetUpdateFormBody = ({ formInfo }) => {
             fieldName="gender"
             placeholder="Select Gender"
             options={gender_options}
-            prevValue = {formInfo.gender}
+            value = {formInfo.gender}
             errorMessage="Please select a gender."
             validate={(value) => value !== ""}
+            update = {(e) => setFormInfo({...formInfo, gender: e.target.value})}
           />
         </div>
       </div>
       <div className="row">
         <div className="col">
-          <TextField
+          <SimpleTextField
             fieldName="age"
             placeholder="Age"
             type="number"
-            prevValue = {formInfo.age}
+            value = {formInfo.age}
             errorMessage="Please enter a valid age."
             validate={(value) =>
               Number.isInteger(Number(value)) && Number(value) >= 0
             }
+            update = {(e) => setFormInfo({...formInfo, age: e.target.value})}
           />
         </div>
         <div className="col">
@@ -89,9 +95,10 @@ export const PetUpdateFormBody = ({ formInfo }) => {
             fieldName="status"
             placeholder="Select Status"
             options={status_options}
-            prevValue = {formInfo.status}
+            value = {formInfo.status}
             errorMessage="Please select a status."
             validate={(value) => value !== ""}
+            update = {(e) => setFormInfo({...formInfo, status: e.target.value})}
           />
         </div>
       </div>
@@ -99,17 +106,20 @@ export const PetUpdateFormBody = ({ formInfo }) => {
         fieldName="description"
         placeholder="Description"
         rows={4} // Set the number of rows you desire
-        prevValue = {formInfo.description}
+        value = {formInfo.description}
         errorMessage="Please enter a description."
         validate={(value) => value.trim() !== ""}
+        update = {(e) => setFormInfo({...formInfo, description: e.target.value})}
       />
       <ImageField
         fieldName="picture"
         label="pet-picture"
         accept="image/*"
-        prevValue = {formInfo.picture}
+        value = {formInfo.picture}
         errorMessage="Please upload a valid image."
+        value={formInfo.picture || ""}
         validate={() => true}
+        update = {(selectedFile) => setFormInfo({...formInfo, picture: selectedFile})}
       />
       <Button
         id="create"

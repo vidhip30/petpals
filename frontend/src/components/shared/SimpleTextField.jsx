@@ -1,14 +1,15 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 
-export const TextField = ({
+export const SimpleTextField = ({
   fieldName,
   placeholder,
   type,
   errorMessage,
   validate,
+  value,
+  update
 }) => {
-  const [text, setText] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
@@ -20,10 +21,10 @@ export const TextField = ({
         name={fieldName}
         placeholder={placeholder}
         type={type}
-        value={text}
+        value={value}
         isInvalid={!isValid && isChanged}
         onChange={(e) => {
-          setText(e.target.value);
+          update(e);
           setIsValid(validate(e.target.value));
           setIsChanged(true);
         }}

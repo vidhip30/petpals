@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
+import { updatePetListing } from "../../api/shelter";
 
 export const DropdownField = ({
   fieldName,
@@ -7,8 +8,9 @@ export const DropdownField = ({
   options,
   errorMessage,
   validate,
+  value,
+  update
 }) => {
-  const [selectedValue, setSelectedValue] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
@@ -19,10 +21,10 @@ export const DropdownField = ({
         required
         className="form-field mt-3"
         name={fieldName}
-        value={selectedValue}
+        value={value}
         isInvalid={!isValid && isChanged}
         onChange={(e) => {
-          setSelectedValue(e.target.value);
+          update(e);
           setIsValid(validate(e.target.value));
           setIsChanged(true);
         }}
@@ -31,7 +33,7 @@ export const DropdownField = ({
           {placeholder}
         </option>
         {options.map((option, index) => (
-          <option key={index} value={option.value}>
+          <option selected = {value === option.value} key={index} value={option.value}>
             {option.label}
           </option>
         ))}
