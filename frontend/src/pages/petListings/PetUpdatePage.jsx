@@ -15,7 +15,7 @@ export const PetUpdatePage = () => {
         picture: null,
       });
 
-    const listingId  = 1;
+    const { listingId }  = useParams();
     const fetchInitialPetListing = async () => {
         const response = await getPetListing(listingId);
         const petData = await response.json();

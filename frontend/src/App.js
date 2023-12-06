@@ -37,7 +37,7 @@ function App() {
                 }
               ></Route>
               <Route
-                path="update-pet"
+                path="update-pet/:listingId"
                 element={
                     <PetUpdatePage />
                 }
