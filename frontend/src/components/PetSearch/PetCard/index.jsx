@@ -27,7 +27,7 @@ function PetCard({ pets, shelterNames }) {
             </div>
             <div className="text-center mt-1">
               <Link
-                to={`/shelters/${pet.shelter}/petlistings/${pet.id}`}
+                to={`/petlistings/${pet.id}`}
                 data-bs-target="#petInfoModal"
               >
                 <Card.Title>

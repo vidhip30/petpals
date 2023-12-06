@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { PetDetailPage } from "./pages/petListings/PetDetailPage";
 import PetSearchPage from "./pages/search";
 import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
@@ -31,6 +31,10 @@ function App() {
             </Route>
             <Route element={<NavBar />}>
               <Route path="petlistings" element={<PetSearchPage />}></Route>
+              <Route
+                path="petlistings/:petID"
+                element={<PetDetailPage />}
+              ></Route>
               <Route path="shelters">
                 <Route
                   path="create-pet"
