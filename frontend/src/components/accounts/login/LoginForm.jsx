@@ -16,8 +16,6 @@ export const LoginForm = () => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const { authenticated, setAuthenticated } = useContext(Context);
-
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
@@ -43,8 +41,6 @@ export const LoginForm = () => {
     const loginResult = await login({ username, password });
 
     if (loginResult.success) {
-      setAuthenticated(true);
-
       // Redirect to the index page upon successful login
       navigate("/");
     } else {
@@ -61,7 +57,7 @@ export const LoginForm = () => {
 
   return (
     <Form
-      className="p-5 pt-0 border rounded shadow-sm needs-validation"
+      className="account-form p-5 pt-0 border rounded shadow-sm needs-validation"
       id="loginform"
       noValidate
       validated={validated}
@@ -106,7 +102,6 @@ export const LoginForm = () => {
       >
         Submit
       </Button>
-
       {/* Link to register */}
       <p id="haveacc">
         Don't have an account?&nbsp;

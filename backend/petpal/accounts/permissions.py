@@ -19,8 +19,8 @@ class SeekerPermission(BasePermission):
         if view.action == 'create':
             return True
 
-        if view.action == 'retrieve':
-            return request.user.is_authenticated and user_is_shelter(request.user)
+        if view.action in ['partial_update', 'update', 'retrieve']:
+            return request.user.is_authenticated
 
         return request.user.is_authenticated and request.user.is_superuser
 
@@ -30,7 +30,7 @@ class ShelterPermission(BasePermission):
         if view.action == 'create':
             return True
 
-        if view.action in ['retrieve', 'list']:
+        if view.action in ['retrieve', 'list', 'partial_update', 'update']:
             return request.user.is_authenticated
 
         return request.user.is_authenticated and request.user.is_superuser

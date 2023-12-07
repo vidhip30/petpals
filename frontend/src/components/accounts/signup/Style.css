@@ -15,7 +15,7 @@
   opacity: 100%;
 }
 
-#brand-name {
+#brand-name-accounts {
   color: #fff;
   font-family: "Luckiest Guy", sans-serif;
   font-size: 60px !important;
@@ -109,8 +109,9 @@ span {
 }
 
 html,
-main {
-  background-color: #f8f6f2;
+main,
+body {
+  background-color: #f8f6f2 !important;
 }
 
 body,
@@ -129,11 +130,10 @@ html {
   margin-bottom: 28px;
 }
 
-form {
+.account-form {
   display: block;
   margin: 0 auto;
   width: 700px;
-  margin-top: 15px;
   background-color: white;
 }
 
@@ -141,6 +141,14 @@ form {
   width: 450px;
   height: 400px;
   margin-top: 80px;
+}
+
+.invalid-form-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 1.2rem;
+  color: var(--bs-form-invalid-color);
+  text-align: center;
 }
 
 @media screen and (max-width: 550px) {

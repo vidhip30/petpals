@@ -1,24 +1,29 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { PetDetailPage } from "./pages/petListings/PetDetailPage";
+import PetSearchPage from "./pages/search";
 import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
 import { PetCreatePage } from "./pages/petListings/PetCreatePage";
 import { PetUpdatePage } from "./pages/petListings/PetUpdatePage";
 import { PageNotFound } from "./pages/misc/PageNotFound";
 import { ListSheltersPage } from "./pages/admin/ListSheltersPage";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { ProtectedRoute } from "./components/authentication/ProtectedRoute";
+import { useAccountsContext } from "./hooks/useAccountsContext";
+import { NavBar } from "./components/shared/NavBar";
+import { ProfilePage } from "./pages/profile/ProfilePage";
+import { ShelterDetailPage } from "./pages/profile/ShelterDetailPage";
+import { SeekerDetailPage } from "./pages/profile/SeekerDetailPage";
+import { ApplicationDetailPage } from "./pages/applications/ApplicationDetailPage";
+import { CreatePage } from "./pages/applications/CreatePage";
 
 export const Context = createContext();
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(
-    !!localStorage.getItem("accessToken"),
-  );
-
   return (
-    <Context.Provider value={{ authenticated, setAuthenticated }}>
+    <Context.Provider value={useAccountsContext()}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -27,31 +32,60 @@ function App() {
               <Route path="signup" element={<SignupPage />}></Route>
               <Route path="login" element={<LoginPage />}></Route>
             </Route>
-            <Route path="shelters">
+            <Route element={<NavBar />}>
+              <Route path="petlistings" element={<PetSearchPage />}></Route>
               <Route
-                path="create-pet"
-                element={
-              
-                    <PetCreatePage />
-                  
-                }
+                path="petlistings/:petID"
+                element={<PetDetailPage />}
               ></Route>
-              <Route
-                path="update-pet/:listingId"
-                element={
-                    <PetUpdatePage />
-                }
-              ></Route>
-            </Route>
-            <Route path="admin">
-              <Route
-                path="shelters"
-                element={
-                  <ProtectedRoute>
-                    <ListSheltersPage />
-                  </ProtectedRoute>
-                }
-              ></Route>
+              <Route path="shelters">
+                <Route
+                  path="create-pet"
+                  element={
+                    <ProtectedRoute>
+                      <PetCreatePage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="update-pet/:listingId"
+                  element={
+                    <ProtectedRoute>
+                      <PetUpdatePage />
+                    </ProtectedRoute>
+                  }
+                ></Route>
+                <Route path=":userID" element={<ShelterDetailPage />} />
+              </Route>
+              <Route path="seekers">
+                <Route path=":userID" element={<SeekerDetailPage />} />
+              </Route>
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="admin">
+                <Route
+                  path="shelters"
+                  element={
+                    <ProtectedRoute>
+                      <ListSheltersPage />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
+
+              <Route path="applications">
+                <Route
+                  path="create/:petID"
+                  element={
+                    <ProtectedRoute>
+                      <CreatePage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path=":applicationID"
+                  element={<ApplicationDetailPage />}
+                ></Route>
+              </Route>
             </Route>
             <Route path="*" element={<PageNotFound />} />
           </Route>
