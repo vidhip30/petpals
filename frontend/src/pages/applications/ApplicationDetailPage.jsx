@@ -33,45 +33,47 @@ export const ApplicationDetailPage = () => {
 
   return (
     <form
-      class="px-5 py-4 border rounded shadow-sm needs-validation"
+      classNameName="px-5 py-4 border rounded shadow-sm needs-validation"
       id="application-summary"
       method="POST"
       novalidate
     >
-      <h1 id="form-title" class="d-flex justify-content-center mb-4 mt-4">
+      <h1 id="form-title" className="d-flex justify-content-center mb-4 mt-4">
         Your Adoption Application for {pet}
       </h1>
-      <hr class="hr" />
-      <div id="contact-info" class="row row-cols-1 row-cols-sm-2">
-        <div id="address-field" class="col field">
-          <label class="question" for="address">
+      <hr className="hr" />
+      <div id="contact-info" className="row row-cols-1 row-cols-sm-2">
+        <div id="address-field" className="col field">
+          <label className="question" for="address">
             Address:
           </label>
           <input
             id="address"
-            class="form-control"
+            className="form-control"
             type="text"
             value={application.address}
             readonly
           />
-          <div class="invalid-feedback">Please enter your address.</div>
+          <div className="invalid-feedback">Please enter your address.</div>
         </div>
-        <div id="phone-field" class="col field">
-          <label class="question" for="phone">
+        <div id="phone-field" className="col field">
+          <label className="question" for="phone">
             Phone Number:
           </label>
           <input
             type="text"
             id="phone"
-            class="form-control"
+            className="form-control"
             value={application.phone_number}
             readonly
           />
-          <div class="invalid-feedback">Please enter your phone number.</div>
+          <div className="invalid-feedback">
+            Please enter your phone number.
+          </div>
         </div>
       </div>
-      <div id="home-field" class="field">
-        <p class="question">I live in a:</p>
+      <div id="home-field" className="field">
+        <p className="question">I live in a:</p>
         <input
           type="radio"
           id="house"
@@ -101,10 +103,10 @@ export const ApplicationDetailPage = () => {
           checked={application.living_situation === "condo"}
         />
         <label for="condo">Condo</label>
-        <div class="invalid-feedback">Please select an option.</div>
+        <div className="invalid-feedback">Please select an option.</div>
       </div>
-      <div id="own-field" class="field">
-        <p class="question">Do you own or rent?</p>
+      <div id="own-field" className="field">
+        <p className="question">Do you own or rent?</p>
         <input
           type="radio"
           id="own"
@@ -124,75 +126,75 @@ export const ApplicationDetailPage = () => {
           disabled
         />
         <label for="rent">Rent</label>
-        <div class="invalid-feedback">Please select an option.</div>
+        <div className="invalid-feedback">Please select an option.</div>
       </div>
-      <div class="field">
-        <label class="question" for="occupation">
+      <div className="field">
+        <label className="question" for="occupation">
           What is your occupation?
         </label>
         <input
           type="text"
           id="occupation"
-          class="form-control"
+          className="form-control"
           value={application.occupation}
           readonly
         />
-        <div class="invalid-feedback">Please enter your occupation.</div>
+        <div className="invalid-feedback">Please enter your occupation.</div>
       </div>
-      <div class="field">
-        <label class="question" for="pet-census">
+      <div className="field">
+        <label className="question" for="pet-census">
           How many pets do you have?
         </label>
         <input
           type="number"
           id="pet-census"
-          class="form-control"
+          className="form-control"
           value={application.number_of_pets}
           readonly
         />
-        <div class="invalid-feedback">Please enter a value.</div>
+        <div className="invalid-feedback">Please enter a value.</div>
       </div>
-      <div class="field">
-        <label class="question" for="exercise">
+      <div className="field">
+        <label className="question" for="exercise">
           How many hours of exercise can you give your pet everyday?
         </label>
         <input
           type="number"
           id="exercise"
-          class="form-control"
+          className="form-control"
           value={application.exercise_hours}
           readonly
         />
-        <div class="invalid-feedback">Please enter a value.</div>
+        <div className="invalid-feedback">Please enter a value.</div>
       </div>
-      <div class="field">
-        <label class="question" for="alone">
+      <div className="field">
+        <label className="question" for="alone">
           How many hours a day will your pet spend alone?
         </label>
         <input
           type="number"
           id="alone"
-          class="form-control"
+          className="form-control"
           value={application.alone_hours}
           readonly
         />
-        <div class="invalid-feedback">Please enter a value.</div>
+        <div className="invalid-feedback">Please enter a value.</div>
       </div>
-      <div class="field">
-        <label class="question" for="why">
+      <div className="field">
+        <label className="question" for="why">
           Why do you want to adopt this pet?
         </label>
-        <textarea id="why" class="form-control" rows="3" readonly>
+        <textarea id="why" className="form-control" rows="3" readonly>
           {application.adoption_reason}
         </textarea>
-        <div class="invalid-feedback">Please answer this question.</div>
+        <div className="invalid-feedback">Please answer this question.</div>
       </div>
-      <div class="d-flex justify-content-center">
+      <div className="d-flex justify-content-center">
         <Link
           onClick={() => {
             navigate(-1);
           }}
-          class="mt-4 btn btn-secondary"
+          className="mt-4 btn btn-secondary"
           type="button"
           href="application-summary-user.html"
         >

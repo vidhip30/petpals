@@ -9,7 +9,7 @@ export const DescriptionField = ({
   errorMessage,
   validate,
   update,
-  value
+  value,
 }) => {
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);

@@ -6,10 +6,9 @@ import { updatePetListing } from "../../api/shelter";
 import { getPetListing } from "../../api/shelter";
 
 // Source: https://react-bootstrap.netlify.app/docs/forms/validation
-export const PetUpdateForm = ({listingId, formInfo, setFormInfo}) => {
+export const PetUpdateForm = ({ listingId, formInfo, setFormInfo }) => {
   const [validated, setValidated] = useState(false);
   //const [rendered, setrendered] = useState(true);
-
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -31,9 +30,6 @@ export const PetUpdateForm = ({listingId, formInfo, setFormInfo}) => {
     }
   };
 
-
-  
-
   return (
     <Form
       className="p-5 pt-0 border rounded shadow-sm needs-validation"
@@ -45,7 +41,7 @@ export const PetUpdateForm = ({listingId, formInfo, setFormInfo}) => {
     >
       <h1 id="listpettitle">Update Your Pet!</h1>
       <hr className="hr" />
-      <PetUpdateFormBody formInfo = { formInfo } setFormInfo = { setFormInfo }/>
+      <PetUpdateFormBody formInfo={formInfo} setFormInfo={setFormInfo} />
     </Form>
   );
 };

@@ -8,7 +8,7 @@ export const SimpleTextField = ({
   errorMessage,
   validate,
   value,
-  update
+  update,
 }) => {
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);

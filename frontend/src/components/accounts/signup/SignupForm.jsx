@@ -68,7 +68,7 @@ export const SignupForm = () => {
       <hr className="hr" />
       {accountType === "Pet Seeker" && <SeekerFormBody />}
       {accountType === "Pet Shelter" && <ShelterFormBody />}
-      <p class="invalid-form-feedback">{errorMsg}</p>
+      <p className="invalid-form-feedback">{errorMsg}</p>
       <p id="haveacc">
         Already have an account?&nbsp;
         <a id="loginlink" href="login.html">

@@ -7,7 +7,7 @@ export const getApplication = async (applicationID) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    }
+    },
   );
 
   return response.json();
@@ -34,7 +34,7 @@ export const getPetListingName = async (listingId) => {
       console.error(
         "Failed to fetch pet listing:",
         response.status,
-        response.statusText
+        response.statusText,
       );
       return null;
     }
@@ -63,7 +63,7 @@ export const createApplication = async (listingID, payload) => {
       console.error(
         "Failed to fetch pet listing:",
         response.status,
-        response.statusText
+        response.statusText,
       );
       return null;
     }

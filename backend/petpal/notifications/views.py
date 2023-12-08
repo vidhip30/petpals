@@ -30,10 +30,11 @@ class NotificationViewSet(ModelViewSet):
 
         notifications = Notification.objects.filter(
             user=self.request.user).order_by('-created_at')
-        read = self.request.data.get('read')
+        read = self.request.GET.get('read')
 
         if read is not None:
-            notifications = notifications.filter(read=read)
+            notifications = notifications.filter(
+                read=(read == "True" or read != "False"))
 
         return notifications
 

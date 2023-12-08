@@ -54,3 +54,50 @@ footer {
   height: 3.5rem;
   background: #333973;
 }
+
+#notify-modal {
+  top: 100px;
+  max-height: 75%;
+  border: 1px black;
+}
+
+@media screen and (max-height: 650px) {
+  #notify-modal {
+    max-height: 65%;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  #notify-modal {
+    max-height: 60%;
+  }
+}
+
+@media screen and (max-height: 450px) {
+  #notify-modal {
+    max-height: 50%;
+  }
+}
+
+#notifications {
+  gap: 1rem;
+}
+
+.notify {
+  border-bottom: 1px solid #ccc;
+  text-decoration: none;
+  color: inherit;
+}
+
+.notify-pic {
+  width: 80px !important;
+}
+
+.notify-text {
+  padding: 6px 0px;
+}
+
+.profile-frame {
+  border-radius: 45px;
+  overflow: hidden;
+}

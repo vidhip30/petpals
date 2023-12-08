@@ -8,7 +8,7 @@ export const ImageField = ({
   accept,
   validate,
   update,
-  value
+  value,
 }) => {
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
@@ -23,14 +23,14 @@ export const ImageField = ({
 
   return (
     <div>
-      {value && <img src={value} alt="Current Pet" className='pet-image'/>}
+      {value && <img src={value} alt="Current Pet" className="pet-image" />}
       <div>
         <input
-        type="file"
-        className="form-field mt-3"
-        name={fieldName}
-        accept={accept}
-        onChange={handleFileChange}
+          type="file"
+          className="form-field mt-3"
+          name={fieldName}
+          accept={accept}
+          onChange={handleFileChange}
         />
       </div>
       {!isValid && isChanged && <p>{errorMessage}</p>}

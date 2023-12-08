@@ -39,7 +39,7 @@ function PetSearchPage() {
       shelter: searchParams.getAll("shelter") ?? [],
       sort_by: searchParams.getAll("sort_by") ?? [],
     }),
-    [searchParams]
+    [searchParams],
   );
 
   const fetchAllPages = async (url, allResults = []) => {
@@ -65,13 +65,12 @@ function PetSearchPage() {
       const promises = uniqueShelters.map((shelterId) =>
         getUser(shelterId, "shelter").then((shelterInfo) => ({
           [shelterId]: shelterInfo.name,
-        }))
+        })),
       );
 
       const shelterData = await Promise.all(promises);
       const mergedData = Object.assign({}, ...shelterData);
       setShelterNames(mergedData);
-      console.log("Fetch shelter data");
     } catch (error) {
       console.error("Error fetching shelter data:", error);
     }
@@ -79,6 +78,9 @@ function PetSearchPage() {
 
   useEffect(() => {
     fetchAllPages(`http://127.0.0.1:8000/petlistings/`);
+
+    const uniqueShelters = [...new Set(AllPets.map((pet) => pet.shelter))];
+    fetchDataForShelters(uniqueShelters);
   }, []);
 
   useEffect(() => {
@@ -128,12 +130,9 @@ function PetSearchPage() {
         <div className="dropdown-group">
           <p>Status:</p>
           <Select
-            options={[
-              "available",
-              "pending",
-              "withdrawn",
-              "adopted",
-            ].map((status) => ({ value: status, label: status }))}
+            options={["available", "pending", "withdrawn", "adopted"].map(
+              (status) => ({ value: status, label: status }),
+            )}
             isMulti
             value={query.status.map((status) => ({
               value: status,
@@ -218,7 +217,7 @@ function PetSearchPage() {
             options={sortOptions}
             isMulti
             value={sortOptions.filter((option) =>
-              query.sort_by.includes(option.value)
+              query.sort_by.includes(option.value),
             )}
             onChange={(selectedOptions) => {
               setSearchParams({
@@ -231,9 +230,7 @@ function PetSearchPage() {
         </div>
       </div>
       <div className="large-text text-center p-md-5 p-sm-3">Available Pets</div>
-
       <PetCard pets={pets} shelterNames={shelterNames} />
-
       <p>
         {next !== null ? (
           <Button

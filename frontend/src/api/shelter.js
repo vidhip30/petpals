@@ -9,27 +9,30 @@ export const createPetListing = async (payload) => {
   return response;
 };
 
-export const updatePetListing = async (listingId, payload) =>{
-  const response = await fetch(`http://127.0.0.1:8000/petlistings/${listingId}/`, {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+export const updatePetListing = async (listingId, payload) => {
+  const response = await fetch(
+    `http://127.0.0.1:8000/petlistings/${listingId}/`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: payload,
     },
-    body: payload,
-  });
-
+  );
 
   return response;
-}
+};
 
-export const getPetListing = async (listingId) =>{
-  const response = await fetch(`http://127.0.0.1:8000/petlistings/${listingId}/`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+export const getPetListing = async (listingId) => {
+  const response = await fetch(
+    `http://127.0.0.1:8000/petlistings/${listingId}/`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     },
-  });
+  );
   return response;
-}
-
-
+};

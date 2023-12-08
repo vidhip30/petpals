@@ -4,27 +4,26 @@ import { getPetListing } from "../../api/shelter";
 import { useParams } from "react-router";
 
 export const PetUpdatePage = () => {
+  const [formInfo, setFormInfo] = useState({
+    name: "",
+    breed: "",
+    size: "",
+    gender: "",
+    age: 0,
+    status: "",
+    description: "",
+    picture: null,
+  });
 
-    const [formInfo, setFormInfo] = useState({
-        name: "",
-        breed: "",
-        size: "",
-        gender: "",
-        age: 0,
-        status: "",
-        description: "",
-        picture: null,
-      });
-
-    const { listingId }  = useParams();
-    const fetchInitialPetListing = async () => {
-        const response = await getPetListing(listingId);
-        const petData = await response.json();
-        setFormInfo(petData);
-    };
-    useEffect(() => {
-        fetchInitialPetListing();
-    }, []);
+  const { listingId } = useParams();
+  const fetchInitialPetListing = async () => {
+    const response = await getPetListing(listingId);
+    const petData = await response.json();
+    setFormInfo(petData);
+  };
+  useEffect(() => {
+    fetchInitialPetListing();
+  }, []);
   return (
     <>
       <div>
@@ -36,7 +35,11 @@ export const PetUpdatePage = () => {
         </button>
         <img id="logo" src="/images/paw.png" alt="PetPal logo" width="50px" />
       </div>
-      <PetUpdateForm listingId = {listingId} formInfo = {formInfo} setFormInfo = {setFormInfo}/>
+      <PetUpdateForm
+        listingId={listingId}
+        formInfo={formInfo}
+        setFormInfo={setFormInfo}
+      />
     </>
   );
 };
