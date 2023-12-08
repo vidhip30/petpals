@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
-import { updatePetListing } from "../../api/shelter";
+import { useState } from "react";
+import Form from "react-bootstrap/Form";
 
-export const DropdownField = ({
+export const SimpleTextField = ({
   fieldName,
   placeholder,
-  options,
+  type,
   errorMessage,
   validate,
   value,
@@ -17,10 +16,11 @@ export const DropdownField = ({
   return (
     <Form.Group>
       <Form.Control
-        as="select"
         required
         className="form-field mt-3"
         name={fieldName}
+        placeholder={placeholder}
+        type={type}
         value={value}
         isInvalid={!isValid && isChanged}
         onChange={(e) => {
@@ -28,19 +28,21 @@ export const DropdownField = ({
           setIsValid(validate(e.target.value));
           setIsChanged(true);
         }}
-      >
-        <option value="" disabled>
-          {placeholder}
-        </option>
-        {options.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </Form.Control>
+      />
       <Form.Control.Feedback type="invalid">
         {errorMessage}
       </Form.Control.Feedback>
     </Form.Group>
+  );
+};
+
+export const validatePlaintext = (text) => {
+  return text.trim().length > 0;
+};
+
+export const validateEmail = (email) => {
+  // Source: https://stackoverflow.com/a/46181
+  return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email,
   );
 };

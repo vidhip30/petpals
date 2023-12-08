@@ -24,6 +24,8 @@ from drf_yasg.views import get_schema_view
 from notifications.views import NotificationViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_nested.routers import NestedSimpleRouter
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Source: https://github.com/alanjds/drf-nested-routers#quickstart
 

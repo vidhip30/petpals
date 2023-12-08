@@ -6,6 +6,7 @@ import PetSearchPage from "./pages/search";
 import { LoginPage } from "./pages/accounts/LoginPage";
 import { SignupPage } from "./pages/accounts/SignupPage";
 import { PetCreatePage } from "./pages/petListings/PetCreatePage";
+import { PetUpdatePage } from "./pages/petListings/PetUpdatePage";
 import { PageNotFound } from "./pages/misc/PageNotFound";
 import { ListSheltersPage } from "./pages/admin/ListSheltersPage";
 import { createContext } from "react";
@@ -46,6 +47,14 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="update-pet/:listingId"
+                  element={
+                    <ProtectedRoute>
+                      <PetUpdatePage />
+                    </ProtectedRoute>
+                  }
+                ></Route>
                 <Route path=":userID" element={<ShelterDetailPage />} />
               </Route>
               <Route path="seekers">
