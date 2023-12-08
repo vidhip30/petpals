@@ -27,6 +27,7 @@ function PetSearchPage() {
   const [pets, setPets] = useState([]);
   const [AllPets, setAllPets] = useState([]);
   const [shelterNames, setShelterNames] = useState({});
+  const token = localStorage.getItem("accessToken");
 
   const query = useMemo(
     () => ({
@@ -38,36 +39,55 @@ function PetSearchPage() {
       shelter: searchParams.getAll("shelter") ?? [],
       sort_by: searchParams.getAll("sort_by") ?? [],
     }),
-    [searchParams],
+    [searchParams]
   );
 
+  const fetchAllPages = async (url, allResults = []) => {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const json = await response.json();
+    allResults.push(...json.results);
+
+    if (json.next) {
+      await fetchAllPages(json.next, allResults);
+    } else {
+      setAllPets(allResults);
+    }
+  };
+
+  const fetchDataForShelters = async (uniqueShelters) => {
+    try {
+      const promises = uniqueShelters.map((shelterId) =>
+        getUser(shelterId, "shelter").then((shelterInfo) => ({
+          [shelterId]: shelterInfo.name,
+        }))
+      );
+
+      const shelterData = await Promise.all(promises);
+      const mergedData = Object.assign({}, ...shelterData);
+      setShelterNames(mergedData);
+      console.log("Fetch shelter data");
+    } catch (error) {
+      console.error("Error fetching shelter data:", error);
+    }
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-
-    const fetchAllPages = async (url, allResults = []) => {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const json = await response.json();
-      allResults.push(...json.results);
-
-      if (json.next) {
-        await fetchAllPages(json.next, allResults);
-      } else {
-        setAllPets(allResults);
-      }
-    };
-
     fetchAllPages(`http://127.0.0.1:8000/petlistings/`);
   }, []);
 
   useEffect(() => {
+    const uniqueShelters = [...new Set(AllPets.map((pet) => pet.shelter))];
+    fetchDataForShelters(uniqueShelters);
+  }, [AllPets]);
+
+  useEffect(() => {
     const params = to_url_params(query);
-    const token = localStorage.getItem("accessToken");
 
     fetch(`http://127.0.0.1:8000/petlistings/?${params}`, {
       method: "GET",
@@ -82,31 +102,6 @@ function PetSearchPage() {
       });
   }, [query]);
 
-  const uniqueShelters = [...new Set(AllPets.map((pet) => pet.shelter))];
-
-  useEffect(() => {
-    // Fetch shelter data
-    const fetchDataForShelters = async () => {
-      const token = localStorage.getItem("accessToken");
-
-      try {
-        const promises = uniqueShelters.map((shelterId) =>
-          getUser(shelterId, "shelter").then((shelterInfo) => ({
-            [shelterId]: shelterInfo.name,
-          })),
-        );
-
-        const shelterData = await Promise.all(promises);
-        const mergedData = Object.assign({}, ...shelterData);
-        setShelterNames(mergedData);
-      } catch (error) {
-        console.error("Error fetching shelter data:", error);
-      }
-    };
-
-    fetchDataForShelters();
-  }, [uniqueShelters]);
-
   const uniqueBreeds = [...new Set(AllPets.map((pet) => pet.breed))];
 
   // Options for the multi-select dropdown
@@ -118,7 +113,7 @@ function PetSearchPage() {
 
   return (
     <>
-      <div class=" search mt-4">
+      <div className=" search mt-4">
         <label>
           <input
             value={query.search}
@@ -133,9 +128,12 @@ function PetSearchPage() {
         <div className="dropdown-group">
           <p>Status:</p>
           <Select
-            options={["available", "pending", "withdrawn", "adopted"].map(
-              (status) => ({ value: status, label: status }),
-            )}
+            options={[
+              "available",
+              "pending",
+              "withdrawn",
+              "adopted",
+            ].map((status) => ({ value: status, label: status }))}
             isMulti
             value={query.status.map((status) => ({
               value: status,
@@ -220,7 +218,7 @@ function PetSearchPage() {
             options={sortOptions}
             isMulti
             value={sortOptions.filter((option) =>
-              query.sort_by.includes(option.value),
+              query.sort_by.includes(option.value)
             )}
             onChange={(selectedOptions) => {
               setSearchParams({
@@ -232,8 +230,10 @@ function PetSearchPage() {
           />
         </div>
       </div>
-      <div class="large-text text-center p-md-5 p-sm-3">Available Pets</div>
+      <div className="large-text text-center p-md-5 p-sm-3">Available Pets</div>
+
       <PetCard pets={pets} shelterNames={shelterNames} />
+
       <p>
         {next !== null ? (
           <Button
