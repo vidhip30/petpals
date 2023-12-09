@@ -8,6 +8,7 @@ import {
   updateNotification,
   getFilteredNotifications,
 } from "../../api/notifications";
+import { deleteNotification } from "../../api/notifications";
 
 // Source: https://react-bootstrap.netlify.app/docs/components/modal/
 export const Header = () => {
@@ -29,6 +30,16 @@ export const Header = () => {
 
   const handleClose = () => {
     setShowModal(false);
+  };
+
+  const handleDelete = async (notifyID) => {
+    await deleteNotification(userID, userType, notifyID);
+
+    setNotifications(
+      notifications.filter((notification) => {
+        notification.id !== notifyID;
+      }),
+    );
   };
 
   useEffect(() => {
@@ -138,6 +149,7 @@ export const Header = () => {
         handleClose={handleClose}
         handleLoadPrev={handleClickPrev}
         handleLoadNext={handleClickNext}
+        handleDelete={handleDelete}
         setFilter={setFilter}
       />
     </>

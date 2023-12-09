@@ -13,6 +13,7 @@ export const NotifyModal = ({
   nextPage,
   handleLoadPrev,
   handleLoadNext,
+  handleDelete,
   setFilter,
 }) => {
   const handleFilterChange = (event) => {
@@ -62,13 +63,18 @@ export const NotifyModal = ({
           {notifications.map((notification, index) => (
             <Notification
               key={index}
+              id={notification.id}
               text={notification.text}
               image={notification.image}
               read={notification.read}
               time={notification.created_at}
               link={notification.link}
+              handleDelete={handleDelete}
             />
           ))}
+          {Object.keys(notifications).length === 0 && (
+            <h5>No notifications!</h5>
+          )}
         </div>
         <Row className="pt-4">
           <Col>

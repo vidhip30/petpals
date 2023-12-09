@@ -101,3 +101,7 @@ footer {
   border-radius: 45px;
   overflow: hidden;
 }
+
+.notify-delete-btn {
+  height: 50%;
+}
