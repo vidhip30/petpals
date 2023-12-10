@@ -5,7 +5,7 @@ export const getApplication = async (applicationID) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA0Mzk2MDA0LCJpYXQiOjE3MDIyMzYwMDQsImp0aSI6ImZjNWNhNTk5NGI3MjQ3YjViZDYwYjA3ZTA1MTMxY2ZiIiwidXNlcl9pZCI6NH0.TdAEluWsh7NMS5iXxhUH1zDs3DdkaWC-SkmbusToT_4`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     },
   );
@@ -20,7 +20,7 @@ export const getPetListingName = async (listingId) => {
     const response = await fetch(url, {
       method: "GET",
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNzQxMzYxLCJpYXQiOjE3MDE1ODEzNjEsImp0aSI6IjU4NGMxZGVjZGZlNjQ1MjY5Yzg4NDgzYjdjZmJjODZjIiwidXNlcl9pZCI6MX0.3viiz2gssHrK9OV57yekc1Q5E7SNhF-Ru-N7nWFjRco`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     });
 
@@ -52,7 +52,7 @@ export const createApplication = async (listingID, payload) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNzQxMzYxLCJpYXQiOjE3MDE1ODEzNjEsImp0aSI6IjU4NGMxZGVjZGZlNjQ1MjY5Yzg4NDgzYjdjZmJjODZjIiwidXNlcl9pZCI6MX0.3viiz2gssHrK9OV57yekc1Q5E7SNhF-Ru-N7nWFjRco`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(payload),
     });
@@ -81,7 +81,7 @@ export const updateApplication = async (applicationID, payload) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA0Mzk2MDA0LCJpYXQiOjE3MDIyMzYwMDQsImp0aSI6ImZjNWNhNTk5NGI3MjQ3YjViZDYwYjA3ZTA1MTMxY2ZiIiwidXNlcl9pZCI6NH0.TdAEluWsh7NMS5iXxhUH1zDs3DdkaWC-SkmbusToT_4`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(payload),
     });
