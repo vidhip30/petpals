@@ -44,6 +44,36 @@ export const getPetListingName = async (listingId) => {
   }
 };
 
+export const getPetListingID = async (applicationID) => {
+  const url = `http://127.0.0.1:8000/pet_listings/applications/${applicationID}/`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
+
+    if (response.ok) {
+      const applicationData = await response.json();
+
+      const petID = applicationData.pet_listing;
+      return petID;
+    } else {
+      console.error(
+        "Failed to fetch application:",
+        response.status,
+        response.statusText
+      );
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching application:", error.message);
+    return null;
+  }
+};
+
 export const createApplication = async (listingID, payload) => {
   const url = `http://127.0.0.1:8000/pet_listings/${listingID}/applications/`;
 
