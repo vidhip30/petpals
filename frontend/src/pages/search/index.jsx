@@ -1,10 +1,11 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import PetCard from "../../components/PetSearch/PetCard";
 import { useSearchParams } from "react-router-dom";
 import Select from "react-select"; // Import the Select component
 import Button from "react-bootstrap/Button";
 import "./style.css";
 import { getUser } from "../../api/accounts";
+import { Context } from "../../App";
 
 function to_url_params(object) {
   var result = [];
@@ -22,6 +23,7 @@ function to_url_params(object) {
 }
 
 function PetSearchPage() {
+  const { authenticated } = useContext(Context);
   const [searchParams, setSearchParams] = useSearchParams();
   const [next, setNext] = useState(true);
   const [pets, setPets] = useState([]);
@@ -77,6 +79,10 @@ function PetSearchPage() {
   };
 
   useEffect(() => {
+    if (!authenticated) {
+      return;
+    }
+
     fetchAllPages(`http://127.0.0.1:8000/petlistings/`);
 
     const uniqueShelters = [...new Set(AllPets.map((pet) => pet.shelter))];
@@ -84,11 +90,19 @@ function PetSearchPage() {
   }, []);
 
   useEffect(() => {
+    if (!authenticated) {
+      return;
+    }
+
     const uniqueShelters = [...new Set(AllPets.map((pet) => pet.shelter))];
     fetchDataForShelters(uniqueShelters);
   }, [AllPets]);
 
   useEffect(() => {
+    if (!authenticated) {
+      return;
+    }
+
     const params = to_url_params(query);
 
     fetch(`http://127.0.0.1:8000/petlistings/?${params}`, {

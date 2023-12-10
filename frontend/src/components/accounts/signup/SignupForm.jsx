@@ -6,6 +6,7 @@ import { useState } from "react";
 import { SeekerFormBody } from "./SeekerFormBody";
 import { registerPetSeeker, registerShelter } from "../../../api/accounts";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Source: https://react-bootstrap.netlify.app/docs/forms/validation
 export const SignupForm = () => {
@@ -71,9 +72,9 @@ export const SignupForm = () => {
       <p className="invalid-form-feedback">{errorMsg}</p>
       <p id="haveacc">
         Already have an account?&nbsp;
-        <a id="loginlink" href="login.html">
+        <Link id="loginlink" to="/accounts/login">
           Log in
-        </a>
+        </Link>
       </p>
     </Form>
   );

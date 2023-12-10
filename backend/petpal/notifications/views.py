@@ -5,6 +5,7 @@ from notifications.models import Notification
 from notifications.permissions import NotificationPermission
 from notifications.serializers import NotificationSerializer
 from rest_framework.viewsets import ModelViewSet
+from accounts.models import User
 
 
 # Only allow modifications that change read status to True.
@@ -47,7 +48,7 @@ class NotificationViewSet(ModelViewSet):
     # Source:
     # https://www.django-rest-framework.org/api-guide/generic-views/
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=User.objects.filter(id=self.kwargs['account_pk'])[0])
 
     @swagger_auto_schema(
         operation_summary='List all notifications for current user',

@@ -101,3 +101,11 @@ footer {
   border-radius: 45px;
   overflow: hidden;
 }
+
+.custom-button {
+  background-color: #333973 !important;
+  border-color: #333973 !important;
+}
+.notify-delete-btn {
+  height: 50%;
+}
