@@ -17,6 +17,7 @@ export const ShelterUpdateApplicationForm = ({
     };
 
     const response = await updateApplication(applicationID, payload);
+    setStatusInfo(selectedOption);
   };
 
   return (
