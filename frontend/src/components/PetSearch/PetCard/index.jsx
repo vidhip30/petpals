@@ -3,8 +3,20 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./style.css";
+import { useContext } from "react";
+import { Context } from "../../../App";
 
 function PetCard({ pets, shelterNames }) {
+  const { authenticated } = useContext(Context);
+
+  if (!authenticated) {
+    return (
+      <div className="text-center mt-3">
+        <p>Please login to view search results!</p>
+      </div>
+    );
+  }
+
   if (!pets || !Array.isArray(pets) || pets.length === 0) {
     return (
       <div className="text-center mt-3">
@@ -27,7 +39,7 @@ function PetCard({ pets, shelterNames }) {
             </div>
             <div className="text-center mt-1">
               <Link
-                to={`/petlistings/${pet.id}`}
+                to={`/pet-listings/${pet.id}`}
                 data-bs-target="#petInfoModal"
               >
                 <Card.Title>

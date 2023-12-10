@@ -7,12 +7,13 @@ import {
   getNotifications,
   updateNotification,
   getFilteredNotifications,
+  deleteNotification,
 } from "../../api/notifications";
-import { deleteNotification } from "../../api/notifications";
 
 // Source: https://react-bootstrap.netlify.app/docs/components/modal/
 export const Header = () => {
-  const { username, userID, userType, profilePicURL } = useContext(Context);
+  const { authenticated, username, userID, userType, profilePicURL } =
+    useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [prevPage, setPrevPage] = useState("");
@@ -43,8 +44,10 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    handleRender();
-    markAsRead();
+    if (authenticated) {
+      handleRender();
+      markAsRead();
+    }
   }, []);
 
   useEffect(() => {
@@ -66,7 +69,9 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    handleFilterUpdate();
+    if (authenticated) {
+      handleFilterUpdate();
+    }
   }, [filter]);
 
   const updateStates = (response) => {
@@ -110,7 +115,7 @@ export const Header = () => {
           <div className="container-fluid flex-nowrap">
             <Link
               id="brand-name"
-              to="/search"
+              to="/"
               className="navbar-brand d-flex justify-content-center align-items-center text-decoration-none fs-1"
             >
               <img
@@ -121,37 +126,48 @@ export const Header = () => {
               />
               PetPals
             </Link>
-            <div id="profile-widget" className="d-flex align-items-center fs-5">
-              <button type="button" className="btn" onClick={handleOpen}>
-                <img
-                  id="notify-icon"
-                  src={
-                    notifications
-                      ? "/images/bell-pin-light.svg"
-                      : "/images/bell-light.svg"
-                  }
-                  alt="Notification icon"
-                />
-              </button>
-              <span id="username">{username}</span>
-              <div id="profile-frame">
-                <img id="profile-pic" src={profilePicURL} alt="Profile image" />
+            {authenticated && (
+              <div
+                id="profile-widget"
+                className="d-flex align-items-center fs-5"
+              >
+                <button type="button" className="btn" onClick={handleOpen}>
+                  <img
+                    id="notify-icon"
+                    src={
+                      notifications
+                        ? "/images/bell-pin-light.svg"
+                        : "/images/bell-light.svg"
+                    }
+                    alt="Notification icon"
+                  />
+                </button>
+                <span id="username">{username}</span>
+                <div id="profile-frame">
+                  <img
+                    id="profile-pic"
+                    src={profilePicURL || "/images/default-profile-pic.jpg"}
+                    alt="Profile image"
+                  />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </nav>
       </header>
-      <NotifyModal
-        show={showModal}
-        notifications={notifications || []}
-        prevPage={prevPage}
-        nextPage={nextPage}
-        handleClose={handleClose}
-        handleLoadPrev={handleClickPrev}
-        handleLoadNext={handleClickNext}
-        handleDelete={handleDelete}
-        setFilter={setFilter}
-      />
+      {authenticated && (
+        <NotifyModal
+          show={showModal}
+          notifications={notifications || []}
+          prevPage={prevPage}
+          nextPage={nextPage}
+          handleClose={handleClose}
+          handleLoadPrev={handleClickPrev}
+          handleLoadNext={handleClickNext}
+          handleDelete={handleDelete}
+          setFilter={setFilter}
+        />
+      )}
     </>
   );
 };

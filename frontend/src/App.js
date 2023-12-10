@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PetDetailPage } from "./pages/petListings/PetDetailPage";
@@ -22,23 +21,15 @@ import { ApplicationListPage } from "./pages/applications/ApplicationListPage";
 
 export const Context = createContext();
 
-function App() {
+const App = () => {
   return (
     <Context.Provider value={useAccountsContext()}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<Landing />} />
-            <Route path="accounts">
-              <Route path="signup" element={<SignupPage />}></Route>
-              <Route path="login" element={<LoginPage />}></Route>
-            </Route>
             <Route element={<NavBar />}>
-              <Route path="petlistings" element={<PetSearchPage />}></Route>
-              <Route
-                path="petlistings/:petID"
-                element={<PetDetailPage />}
-              ></Route>
+              <Route index element={<PetSearchPage />} />
+              <Route path="pet-listings/:petID" element={<PetDetailPage />} />
               <Route path="shelters">
                 <Route
                   path="create-pet"
@@ -55,13 +46,27 @@ function App() {
                       <PetUpdatePage />
                     </ProtectedRoute>
                   }
-                ></Route>
+                />
                 <Route path=":userID" element={<ShelterDetailPage />} />
               </Route>
               <Route path="seekers">
-                <Route path=":userID" element={<SeekerDetailPage />} />
+                <Route
+                  path=":userID"
+                  element={
+                    <ProtectedRoute>
+                      <SeekerDetailPage />
+                    </ProtectedRoute>
+                  }
+                />
               </Route>
-              <Route path="profile" element={<ProfilePage />} />
+              <Route
+                path="profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="admin">
                 <Route
                   path="shelters"
@@ -72,7 +77,6 @@ function App() {
                   }
                 />
               </Route>
-
               <Route path="applications">
                 <Route
                   path="create/:petID"
@@ -84,40 +88,31 @@ function App() {
                 />
                 <Route
                   path=":applicationID"
-                  element={<ApplicationDetailPage />}
+                  element={
+                    <ProtectedRoute>
+                      <ApplicationDetailPage />
+                    </ProtectedRoute>
+                  }
                 ></Route>
                 <Route
                   path="list"
-                  element={<ApplicationListPage />}
+                  element={
+                    <ProtectedRoute>
+                      <ApplicationListPage />
+                    </ProtectedRoute>
+                  }
                 ></Route>
               </Route>
+            </Route>
+            <Route path="accounts">
+              <Route path="signup" element={<SignupPage />} />
+              <Route path="login" element={<LoginPage />} />
             </Route>
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
     </Context.Provider>
-  );
-}
-
-const Landing = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
   );
 };
 
