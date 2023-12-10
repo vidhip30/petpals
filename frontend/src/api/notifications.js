@@ -23,7 +23,7 @@ export const getFilteredNotifications = async (userID, userType, read) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    },
+    }
   );
 
   return response.json();
@@ -33,7 +33,7 @@ export const updateNotification = async (
   userID,
   userType,
   notifyID,
-  payload,
+  payload
 ) => {
   const response = await fetch(
     `http://127.0.0.1:8000/accounts/${userType}/${userID}/notifications/${notifyID}/`,
@@ -44,8 +44,57 @@ export const updateNotification = async (
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(payload),
-    },
+    }
   );
 
   return response.json();
+};
+
+export const deleteNotification = async (userID, userType, notifyID) => {
+  const response = await fetch(
+    `http://127.0.0.1:8000/accounts/${userType}/${userID}/notifications/${notifyID}/`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+
+  return response;
+};
+
+export const createNotification = async (userID, userType, payload) => {
+  var url;
+  if (userType === "shelter") {
+    var url = `http://127.0.0.1:8000/accounts/shelter/${userID}/notifications/`;
+  } else {
+    var url = `http://127.0.0.1:8000/accounts/seeker/${userID}/notifications/`;
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      return response;
+    } else {
+      console.error(
+        "Failed to fetch account:",
+        response.status,
+        response.statusText
+      );
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching account:", error.message);
+    return null;
+  }
 };
