@@ -187,3 +187,32 @@ export const listApplications = async (searchStatus, sortBy, url) => {
   }
 };
 
+export const updateApplication = async (applicationID, payload) => {
+  const url = `http://127.0.0.1:8000/applications/${applicationID}/`;
+
+  try {
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      return response;
+    } else {
+      console.error(
+        "Failed to fetch application",
+        response.status,
+        response.statusText,
+      );
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching application:", error.message);
+    return null;
+  }
+};
+
