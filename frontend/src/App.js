@@ -18,6 +18,8 @@ import { ShelterDetailPage } from "./pages/profile/ShelterDetailPage";
 import { SeekerDetailPage } from "./pages/profile/SeekerDetailPage";
 import { ApplicationDetailPage } from "./pages/applications/ApplicationDetailPage";
 import { CreatePage } from "./pages/applications/CreatePage";
+import { SeekerUpdateApplicationPage } from "./pages/applications/SeekerUpdateApplicationPage";
+import { ShelterUpdateApplicationPage } from "./pages/applications/ShelterUpdateApplicationPage";
 
 export const Context = createContext();
 
@@ -79,6 +81,18 @@ function App() {
                     <ProtectedRoute>
                       <CreatePage />
                     </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="update/seekers/:applicationID"
+                  element={
+                      <SeekerUpdateApplicationPage />
+                  }
+                />
+                <Route
+                  path="update/shelters/:applicationID"
+                  element={
+                      <ShelterUpdateApplicationPage />
                   }
                 />
                 <Route
