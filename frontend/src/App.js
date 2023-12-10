@@ -86,13 +86,17 @@ function App() {
                 <Route
                   path="update/seekers/:applicationID"
                   element={
+                    <ProtectedRoute>
                       <SeekerUpdateApplicationPage />
+                    </ProtectedRoute>
                   }
                 />
                 <Route
                   path="update/shelters/:applicationID"
                   element={
+                    <ProtectedRoute>
                       <ShelterUpdateApplicationPage />
+                    </ProtectedRoute>
                   }
                 />
                 <Route
