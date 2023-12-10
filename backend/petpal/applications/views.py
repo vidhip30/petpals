@@ -1,3 +1,4 @@
+from django.http import Http404
 from accounts.models import PetSeeker, Shelter
 from applications.models import Application
 from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, RetrieveAPIView
@@ -103,9 +104,11 @@ class ApplicationsList(ListAPIView):
         status = self.request.GET.get('status')
         sort_by = self.request.GET.getlist('sort_by')
 
-        shelter = get_object_or_404(Shelter, user_ptr=self.request.user)
-
-        applications = Application.objects.all().filter(pet_listing__shelter=shelter)
+        try:
+            shelter = get_object_or_404(Shelter, user_ptr=self.request.user)
+            applications = Application.objects.all().filter(pet_listing__shelter=shelter)
+        except Http404:
+            applications = Application.objects.filter(user=self.request.user)
 
         if status and (status == 'accepted' or status == 'denied' or status == 'pending' or status == 'withdrawn'):
             applications = applications.filter(status=status)
@@ -118,6 +121,8 @@ class ApplicationsList(ListAPIView):
             sort_by_val.append('created_at')
 
         applications = applications.order_by(*sort_by_val)
+
+        print(applications)
 
         return applications
 

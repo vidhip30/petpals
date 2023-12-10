@@ -18,6 +18,7 @@ import { ShelterDetailPage } from "./pages/profile/ShelterDetailPage";
 import { SeekerDetailPage } from "./pages/profile/SeekerDetailPage";
 import { ApplicationDetailPage } from "./pages/applications/ApplicationDetailPage";
 import { CreatePage } from "./pages/applications/CreatePage";
+import { ApplicationListPage } from "./pages/applications/ApplicationListPage";
 
 export const Context = createContext();
 
@@ -84,6 +85,10 @@ function App() {
                 <Route
                   path=":applicationID"
                   element={<ApplicationDetailPage />}
+                ></Route>
+                <Route
+                  path="list"
+                  element={<ApplicationListPage />}
                 ></Route>
               </Route>
             </Route>
