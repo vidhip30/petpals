@@ -6,6 +6,7 @@ import { ReadOnlyTextField as TextField } from "../../components/profile/ReadOnl
 import { PageNotFound } from "../misc/PageNotFound";
 import Spinner from "react-bootstrap/Spinner";
 import { CommentForm } from "../../components/comments/CommentForm";
+import { CommentFormWithStars } from "../../components/comments/CommentFormWithStars";
 
 export const ShelterDetailPage = () => {
   const { userID } = useParams();
@@ -127,7 +128,7 @@ export const ShelterDetailPage = () => {
           </div>
         </div>
       </Container>
-      <CommentForm
+      <CommentFormWithStars
         objectID={userID}
         objectType="shelter"
         seeker={localStorage.getItem("userID")}

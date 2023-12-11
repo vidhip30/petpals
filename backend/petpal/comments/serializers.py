@@ -14,7 +14,7 @@ class CommentSerializerReview(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('content', 'created_at', 'shelter_review', 'petseeker', 'shelter')
+        fields = ('content', 'created_at', 'shelter_review','stars', 'petseeker', 'shelter')
 
 
     def create(self, validated_data):
@@ -29,6 +29,9 @@ class CommentSerializerReview(serializers.ModelSerializer):
     
     def to_representation(self, instance):
         data = super().to_representation(instance)
+
+        if data.get('stars') is None:
+            del data['stars']
         if data.get('petseeker') is None:
             del data['petseeker']  # Remove 'petseeker' field if it's null
         elif data.get('shelter') is None:

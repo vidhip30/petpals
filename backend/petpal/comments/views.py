@@ -41,6 +41,10 @@ class ShelterCommentsView(ModelViewSet):
             if request.user.shelter:
                 serializer.validated_data['shelter'] = request.user.shelter
 
+        stars = request.data.get('stars')
+        if stars is not None:
+            serializer.validated_data['stars'] = stars
+
         serializer.save()  # The 'shelter_review' assignment is handled within the serializer
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

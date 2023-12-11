@@ -17,7 +17,7 @@ export const Footer = () => {
           <Link to="/profile" className="link-light">
             Profile
           </Link>
-          <Link to="/applications" className="link-light">
+          <Link to="/applications/list" className="link-light">
             Applications
           </Link>
           <Link onClick={logout} className="link-light">

@@ -14,3 +14,4 @@ class Comment(models.Model):
     shelter_review = models.ForeignKey(Shelter, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     # submitted_application_followup is the application the comment is left on, if it is a comment left on an application
     submitted_application_followup = models.ForeignKey(Application, on_delete=models.CASCADE, null=True, blank=True)
+    stars = models.IntegerField(null=True, blank=True, choices=[(1, '1 star'), (2, '2 stars'), (3, '3 stars'), (4, '4 stars'), (5, '5 stars')])

@@ -8,7 +8,8 @@ import { CommentForm } from "../../components/comments/CommentForm";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PageNotFound } from "../misc/PageNotFound";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import React from 'react';
 
 export const ApplicationDetailPage = () => {
   const navigate = useNavigate();
@@ -17,6 +18,10 @@ export const ApplicationDetailPage = () => {
   const [pet, setPet] = useState("");
   const [petID, setPetID] = useState("");
   const [shelter, setShelter] = useState("");
+  const storedUserType = localStorage.getItem('userType')
+  const url = storedUserType === 'shelter'
+    ? `/applications/update/shelters/${applicationID}`
+    : `/applications/update/seekers/${applicationID}`;
 
   const handleRender = async () => {
     const response = await getApplication(applicationID);
@@ -230,6 +235,14 @@ export const ApplicationDetailPage = () => {
           >
             Go Back
           </Link>
+
+          <Link 
+            to={url}
+            className="mt-4 btn btn-secondary" 
+            type="button" >
+            Update Application
+          </Link>
+
         </div>
       </form>
 
