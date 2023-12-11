@@ -5,7 +5,6 @@ import { getApplication } from "../../api/applications";
 import { useState, useEffect } from "react";
 
 export const ShelterUpdateApplicationPage = () => {
-
   const [statusInfo, setStatusInfo] = useState("");
 
   const { applicationID } = useParams();
@@ -20,7 +19,11 @@ export const ShelterUpdateApplicationPage = () => {
 
   return (
     <Container className="mt-5 mb-5">
-      <ShelterUpdateApplicationForm applicationID={applicationID} statusInfo={statusInfo} setStatusInfo={setStatusInfo}/>
+      <ShelterUpdateApplicationForm
+        applicationID={applicationID}
+        statusInfo={statusInfo}
+        setStatusInfo={setStatusInfo}
+      />
     </Container>
   );
 };

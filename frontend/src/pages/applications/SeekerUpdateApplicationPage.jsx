@@ -5,7 +5,6 @@ import { getApplication } from "../../api/applications";
 import { useState, useEffect } from "react";
 
 export const SeekerUpdateApplicationPage = () => {
-
   const [statusInfo, setStatusInfo] = useState("");
 
   const { applicationID } = useParams();
@@ -21,7 +20,11 @@ export const SeekerUpdateApplicationPage = () => {
 
   return (
     <Container className="mt-5 mb-5">
-      <SeekerUpdateApplicationForm applicationID={applicationID} statusInfo={statusInfo} setStatusInfo={setStatusInfo}/>
+      <SeekerUpdateApplicationForm
+        applicationID={applicationID}
+        statusInfo={statusInfo}
+        setStatusInfo={setStatusInfo}
+      />
     </Container>
   );
 };

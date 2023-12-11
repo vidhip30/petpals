@@ -20,14 +20,14 @@ export const CommentForm = ({ objectID, objectType, seeker, shelter }) => {
       .filter((input) => input.name)
       .reduce(
         (obj, input) => Object.assign(obj, { [input.name]: input.value }),
-        {}
+        {},
       );
     const response = await createComment(
       objectID,
       payload,
       objectType,
       seeker,
-      shelter
+      shelter,
     );
 
     if (response) {

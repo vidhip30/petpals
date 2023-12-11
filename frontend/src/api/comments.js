@@ -5,7 +5,7 @@ export const createComment = async (
   payload,
   commentType,
   seeker,
-  shelter
+  shelter,
 ) => {
   var url;
   if (commentType === "application") {
@@ -52,7 +52,7 @@ export const createComment = async (
         "Failed to fetch object:",
         response.status,
         response.statusText,
-        payload
+        payload,
       );
       return null;
     }

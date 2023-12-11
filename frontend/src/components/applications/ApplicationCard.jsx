@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { fetchPetDetails } from "../../api/applications";
-import { Link } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
-import './Style.css'
-
+import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import "./Style.css";
 
 export const ApplicationCard = ({ applicationID }) => {
   const [petDetails, setPetDetails] = useState(null);
@@ -14,7 +13,7 @@ export const ApplicationCard = ({ applicationID }) => {
         const details = await fetchPetDetails(applicationID);
         setPetDetails(details);
       } catch (error) {
-        console.error('Error fetching pet details:', error);
+        console.error("Error fetching pet details:", error);
       }
     };
 
@@ -27,26 +26,22 @@ export const ApplicationCard = ({ applicationID }) => {
   }
 
   // Destructure petDetails
-  const {
-    picture,
-    name,
-    gender,
-    shelterName,
-    breed,
-    size,
-    age,
-    user,
-  } = petDetails;
+  const { picture, name, gender, shelterName, breed, size, age, user } =
+    petDetails;
 
   console.log(user);
 
   // Determine the gender symbol
-  const symbol = gender === 'male' ? '♂' : '♀';
+  const symbol = gender === "male" ? "♂" : "♀";
 
   // Construct the HTML string
   return (
     <Card>
-      <img src={picture} className="card-img-top custom-img mx-auto"  alt={`Image-${name}`} />
+      <img
+        src={picture}
+        className="card-img-top custom-img mx-auto"
+        alt={`Image-${name}`}
+      />
       <div className="text-center mt-1">
         {/* Use React Router Link for navigation */}
         <Link to={`/applications/${applicationID}/`} className="pet-link">

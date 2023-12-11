@@ -21,7 +21,6 @@ import { SeekerUpdateApplicationPage } from "./pages/applications/SeekerUpdateAp
 import { ShelterUpdateApplicationPage } from "./pages/applications/ShelterUpdateApplicationPage";
 import { ApplicationListPage } from "./pages/applications/ApplicationListPage";
 
-
 export const Context = createContext();
 
 const App = () => {

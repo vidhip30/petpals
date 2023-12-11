@@ -23,7 +23,7 @@ export const getFilteredNotifications = async (userID, userType, read) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    }
+    },
   );
 
   return response.json();
@@ -33,7 +33,7 @@ export const updateNotification = async (
   userID,
   userType,
   notifyID,
-  payload
+  payload,
 ) => {
   const response = await fetch(
     `http://127.0.0.1:8000/accounts/${userType}/${userID}/notifications/${notifyID}/`,
@@ -44,7 +44,7 @@ export const updateNotification = async (
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(payload),
-    }
+    },
   );
 
   return response.json();
@@ -59,7 +59,7 @@ export const deleteNotification = async (userID, userType, notifyID) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    }
+    },
   );
 
   return response;
@@ -89,7 +89,7 @@ export const createNotification = async (userID, userType, payload) => {
       console.error(
         "Failed to fetch account:",
         response.status,
-        response.statusText
+        response.statusText,
       );
       return null;
     }

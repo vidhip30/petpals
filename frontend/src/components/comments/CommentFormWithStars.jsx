@@ -1,13 +1,17 @@
-import Stars from './stars';
+import Stars from "./stars";
 import { createComment } from "../../api/comments";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { TextField, validatePlaintext } from "../shared/TextField";
-export const CommentFormWithStars = ({ objectID, objectType, seeker, shelter }) => {
+export const CommentFormWithStars = ({
+  objectID,
+  objectType,
+  seeker,
+  shelter,
+}) => {
   const [validated, setValidated] = useState(false);
   const [stars, setStars] = useState(0);
-
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -23,11 +27,11 @@ export const CommentFormWithStars = ({ objectID, objectType, seeker, shelter }) 
       .filter((input) => input.name)
       .reduce(
         (obj, input) => Object.assign(obj, { [input.name]: input.value }),
-        {}
+        {},
       );
-    
+
     if (stars > 0) {
-        payload.stars = stars;
+      payload.stars = stars;
     }
 
     const response = await createComment(
@@ -35,7 +39,7 @@ export const CommentFormWithStars = ({ objectID, objectType, seeker, shelter }) 
       payload,
       objectType,
       seeker,
-      shelter
+      shelter,
     );
 
     if (response) {
@@ -54,7 +58,6 @@ export const CommentFormWithStars = ({ objectID, objectType, seeker, shelter }) 
       validated={validated}
       onSubmit={handleSubmit}
     >
-
       <Stars onRatingSelected={setStars} />
 
       <label class="fs-5" for="reply-input">
@@ -78,4 +81,3 @@ export const CommentFormWithStars = ({ objectID, objectType, seeker, shelter }) 
     </Form>
   );
 };
-

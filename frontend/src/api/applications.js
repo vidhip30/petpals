@@ -64,7 +64,7 @@ export const getPetListingID = async (applicationID) => {
       console.error(
         "Failed to fetch application:",
         response.status,
-        response.statusText
+        response.statusText,
       );
       return null;
     }
@@ -117,16 +117,18 @@ export const fetchPetDetails = async (applicationID) => {
       },
     });
     if (!response.ok) {
-      throw new Error(`HTTP error! Status with pet details: ${response.status}`);
+      throw new Error(
+        `HTTP error! Status with pet details: ${response.status}`,
+      );
     }
 
-    if (response.ok){
+    if (response.ok) {
       const data = await response.json();
       const shelterID = data.shelter;
       const userID = data.user;
       // Call getShelterName to get shelter details
       const shelterData = await getShelterName(shelterID);
-      
+
       // Extract shelter name from the shelterData
       const shelterName = shelterData.name;
       return {
@@ -141,7 +143,7 @@ export const fetchPetDetails = async (applicationID) => {
       };
     }
   } catch (error) {
-    console.error('Error fetching pet details:', error);
+    console.error("Error fetching pet details:", error);
   }
 };
 
@@ -154,7 +156,7 @@ const getShelterName = async (shelterID) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    }
+    },
   );
   console.log(`shelter info: ${response}`);
 
@@ -180,10 +182,10 @@ export const listApplications = async (searchStatus, sortBy, url) => {
     }
     const responseData = await response.json();
     console.log(responseData);
-    return responseData; 
+    return responseData;
   } catch (error) {
-    console.error('Error with list applications', error);
-    return '';
+    console.error("Error with list applications", error);
+    return "";
   }
 };
 
@@ -215,4 +217,3 @@ export const updateApplication = async (applicationID, payload) => {
     return null;
   }
 };
-
