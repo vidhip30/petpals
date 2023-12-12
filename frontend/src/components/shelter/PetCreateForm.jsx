@@ -3,10 +3,12 @@ import { PetCreateFormBody } from "./PetCreateFormBody";
 import "./Style.css";
 import { useState } from "react";
 import { createPetListing } from "../../api/shelter";
+import { useNavigate } from "react-router-dom";
 
 // Source: https://react-bootstrap.netlify.app/docs/forms/validation
 export const PetCreateForm = () => {
   const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -23,6 +25,7 @@ export const PetCreateForm = () => {
 
     if (response.status === 201) {
       console.log("Pet creation successful!");
+      navigate("/");
     } else {
       console.log("Error with pet creation!");
     }

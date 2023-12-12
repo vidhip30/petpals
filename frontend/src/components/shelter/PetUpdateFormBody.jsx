@@ -52,13 +52,15 @@ export const PetUpdateFormBody = ({ formInfo, setFormInfo }) => {
       </div>
       <div className="row">
         <div className="col">
-          <DropdownField
+          <SimpleTextField
             fieldName="size"
-            placeholder="Select Size"
-            options={size_options}
+            placeholder="Enter size (pounds)"
+            type="number"
             value={formInfo.size}
-            errorMessage="Please select a pet size."
-            validate={(value) => value !== ""}
+            errorMessage="Please enter a valid size."
+            validate={(value) =>
+              Number.isInteger(Number(value)) && Number(value) >= 0
+            }
             update={(e) => setFormInfo({ ...formInfo, size: e.target.value })}
           />
         </div>
@@ -123,6 +125,7 @@ export const PetUpdateFormBody = ({ formInfo, setFormInfo }) => {
           setFormInfo({ ...formInfo, picture: selectedFile })
         }
       />
+
       <Button
         id="create"
         className="mb-3 mt-4 btn btn-secondary"

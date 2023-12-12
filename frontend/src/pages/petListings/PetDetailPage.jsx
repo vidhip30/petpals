@@ -9,7 +9,8 @@ export const PetDetailPage = () => {
   const [pet, setPet] = useState(null);
   const [showModal, setShowModal] = useState(true);
   const navigate = useNavigate();
-
+  const userType = localStorage.getItem("userType");
+  const userID = localStorage.getItem("userID");
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
 
@@ -72,14 +73,20 @@ export const PetDetailPage = () => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        {pet.status !== "available" ? (
+        {userType === "seeker" && pet.status !== "available" ? (
           <Button variant="adopt-status" disabled>
             Currently {pet.status}
           </Button>
-        ) : (
-          <Link to={`application`}>
+        ) : userType === "seeker" ? (
+          <Link to={`/applications/${pet.id}`}>
             <Button className="adopt-button">Adopt!</Button>
           </Link>
+        ) : pet.shelter == userID ? (
+          <Link to={`/shelters/update-pet/${pet.id}`}>
+            <Button className="adopt-button">Update</Button>
+          </Link>
+        ) : (
+          <div></div>
         )}
       </Modal.Footer>
     </Modal>

@@ -4,10 +4,12 @@ import "./Style.css";
 import { useState, useEffect } from "react";
 import { updatePetListing } from "../../api/shelter";
 import { getPetListing } from "../../api/shelter";
+import { useNavigate } from "react-router-dom";
 
 // Source: https://react-bootstrap.netlify.app/docs/forms/validation
 export const PetUpdateForm = ({ listingId, formInfo, setFormInfo }) => {
   const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
   //const [rendered, setrendered] = useState(true);
 
   const handleSubmit = async (event) => {
@@ -25,6 +27,7 @@ export const PetUpdateForm = ({ listingId, formInfo, setFormInfo }) => {
 
     if (response.status === 200) {
       console.log("Pet update successful!");
+      navigate("/");
     } else {
       console.log("Error with pet update!");
     }

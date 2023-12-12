@@ -47,12 +47,14 @@ export const PetCreateFormBody = () => {
       </div>
       <div className="row">
         <div className="col">
-          <DropdownField
+          <TextField
             fieldName="size"
-            placeholder="Select Size"
-            options={size_options}
-            errorMessage="Please select a pet size."
-            validate={(value) => value !== ""}
+            placeholder="Enter Size (pounds)"
+            type="number"
+            errorMessage="Please enter a valid size."
+            validate={(value) =>
+              Number.isInteger(Number(value)) && Number(value) >= 0
+            }
           />
         </div>
         <div className="col">
@@ -101,6 +103,7 @@ export const PetCreateFormBody = () => {
         errorMessage="Please upload a valid image."
         validate={() => true}
       />
+
       <Button
         id="create"
         className="mb-3 mt-4 btn btn-secondary"

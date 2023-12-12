@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import "./style.css";
 import { getUser } from "../../api/accounts";
 import { Context } from "../../App";
+import { Link } from "react-router-dom";
 
 function to_url_params(object) {
   var result = [];
@@ -30,6 +31,7 @@ function PetSearchPage() {
   const [AllPets, setAllPets] = useState([]);
   const [shelterNames, setShelterNames] = useState({});
   const token = localStorage.getItem("accessToken");
+  const userType = localStorage.getItem("userType");
 
   const query = useMemo(
     () => ({
@@ -41,7 +43,7 @@ function PetSearchPage() {
       shelter: searchParams.getAll("shelter") ?? [],
       sort_by: searchParams.getAll("sort_by") ?? [],
     }),
-    [searchParams],
+    [searchParams]
   );
 
   const fetchAllPages = async (url, allResults = []) => {
@@ -67,7 +69,7 @@ function PetSearchPage() {
       const promises = uniqueShelters.map((shelterId) =>
         getUser(shelterId, "shelter").then((shelterInfo) => ({
           [shelterId]: shelterInfo.name,
-        })),
+        }))
       );
 
       const shelterData = await Promise.all(promises);
@@ -129,6 +131,19 @@ function PetSearchPage() {
 
   return (
     <>
+      {userType === "shelter" ? (
+        <Link to="/shelters/create-pet/">
+          <Button
+            className="next create button pt-20"
+            variant="secondary"
+            size="md"
+          >
+            Create Pet Listing
+          </Button>
+        </Link>
+      ) : (
+        <div></div>
+      )}
       <div className=" search mt-4">
         <label>
           <input
@@ -144,9 +159,12 @@ function PetSearchPage() {
         <div className="dropdown-group">
           <p>Status:</p>
           <Select
-            options={["available", "pending", "withdrawn", "adopted"].map(
-              (status) => ({ value: status, label: status }),
-            )}
+            options={[
+              "available",
+              "pending",
+              "withdrawn",
+              "adopted",
+            ].map((status) => ({ value: status, label: status }))}
             isMulti
             value={query.status.map((status) => ({
               value: status,
@@ -231,7 +249,7 @@ function PetSearchPage() {
             options={sortOptions}
             isMulti
             value={sortOptions.filter((option) =>
-              query.sort_by.includes(option.value),
+              query.sort_by.includes(option.value)
             )}
             onChange={(selectedOptions) => {
               setSearchParams({
@@ -243,6 +261,7 @@ function PetSearchPage() {
           />
         </div>
       </div>
+
       <div className="large-text text-center p-md-5 p-sm-3">Available Pets</div>
       <PetCard pets={pets} shelterNames={shelterNames} />
       <p>
