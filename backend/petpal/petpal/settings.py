@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'notifications',
     'comments',
     'applications',
+    'moderation',
     'drf_yasg',
     'corsheaders'
 ]

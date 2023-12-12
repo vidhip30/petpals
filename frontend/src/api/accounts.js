@@ -30,6 +30,7 @@ export const login = async (payload) => {
       localStorage.setItem("userID", data.user_id);
       localStorage.setItem("userType", data.user_type);
       localStorage.setItem("username", payload["username"]);
+      localStorage.setItem("isAdmin", data.is_admin);
 
       // Return the token or any other relevant data
       return { success: true, token };
@@ -130,4 +131,19 @@ export const getUser = async (userID, userType) => {
 
   data["status"] = response.status;
   return data;
+};
+
+export const deleteUser = async (userID, userType) => {
+  const response = await fetch(
+    `http://127.0.0.1:8000/accounts/${userType}/${userID}/`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    },
+  );
+
+  return response;
 };

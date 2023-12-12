@@ -20,6 +20,8 @@ import { CreatePage } from "./pages/applications/CreatePage";
 import { SeekerUpdateApplicationPage } from "./pages/applications/SeekerUpdateApplicationPage";
 import { ShelterUpdateApplicationPage } from "./pages/applications/ShelterUpdateApplicationPage";
 import { ApplicationListPage } from "./pages/applications/ApplicationListPage";
+import { AdminRoute } from "./components/authentication/AdminRoute";
+import { ListReportsPage } from "./pages/admin/ListReportsPage";
 
 export const Context = createContext();
 
@@ -73,9 +75,17 @@ const App = () => {
                 <Route
                   path="shelters"
                   element={
-                    <ProtectedRoute>
+                    <AdminRoute>
                       <ListSheltersPage />
-                    </ProtectedRoute>
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="reports"
+                  element={
+                    <AdminRoute>
+                      <ListReportsPage />
+                    </AdminRoute>
                   }
                 />
               </Route>

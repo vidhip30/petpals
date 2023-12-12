@@ -60,6 +60,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         user = self.user
         data["user_id"] = user.id
+        data["is_admin"] = user.is_superuser
 
         if Shelter.objects.filter(id=user.id).exists():
             data["user_type"] = "shelter"
