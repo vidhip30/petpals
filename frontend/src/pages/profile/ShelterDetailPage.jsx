@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { ReadOnlyTextField as TextField } from "../../components/profile/ReadOnlyTextField";
 import { PageNotFound } from "../misc/PageNotFound";
 import Spinner from "react-bootstrap/Spinner";
+import { Link } from 'react-router-dom';
+
 import { CommentForm } from "../../components/comments/CommentForm";
 import { CommentFormWithStars } from "../../components/comments/CommentFormWithStars";
 
@@ -19,6 +21,7 @@ export const ShelterDetailPage = () => {
   const [phone, setPhone] = useState("");
   const [mission, setMission] = useState("");
   const [profilePicURL, setProfilePicURL] = useState("");
+  const comments = `/comments/list/shelter/${userID}`;
 
   const handleRender = async () => {
     const response = await getUser(userID, "shelter");
@@ -128,12 +131,15 @@ export const ShelterDetailPage = () => {
           </div>
         </div>
       </Container>
-      <CommentFormWithStars
-        objectID={userID}
-        objectType="shelter"
-        seeker={localStorage.getItem("userID")}
-        shelter={userID}
-      />
+      <div className="d-flex justify-content-center mt-4 mb-4">
+        <Link 
+          to={comments}
+          className="btn btn-secondary"
+          type="button"
+        >
+          Comment
+        </Link>
+      </div>
     </>
   );
 };

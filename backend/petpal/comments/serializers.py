@@ -14,7 +14,7 @@ class CommentSerializerReview(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('content', 'created_at', 'shelter_review','stars', 'petseeker', 'shelter')
+        fields = ('id','content', 'created_at', 'shelter_review','stars', 'petseeker', 'shelter')
 
 
     def create(self, validated_data):
@@ -45,7 +45,7 @@ class CommentSerializerApplication(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('content', 'created_at', 'submitted_application_followup', 'petseeker', 'shelter')
+        fields = ('id','content', 'created_at', 'submitted_application_followup', 'petseeker', 'shelter')
 
     def create(self, validated_data):
         application_id = self.context['request'].parser_context['kwargs']['application_id']

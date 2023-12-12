@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { TextField, validatePlaintext } from "../shared/TextField";
-export const CommentForm = ({ objectID, objectType, seeker, shelter }) => {
+export const CommentForm = ({ objectID, objectType, seeker, shelter, onCommentPosted}) => {
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -32,6 +32,7 @@ export const CommentForm = ({ objectID, objectType, seeker, shelter }) => {
 
     if (response) {
       console.log("comment creation successful!");
+      onCommentPosted();
     } else {
       console.log("Error with comment creation!");
     }

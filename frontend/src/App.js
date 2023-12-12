@@ -20,6 +20,7 @@ import { CreatePage } from "./pages/applications/CreatePage";
 import { SeekerUpdateApplicationPage } from "./pages/applications/SeekerUpdateApplicationPage";
 import { ShelterUpdateApplicationPage } from "./pages/applications/ShelterUpdateApplicationPage";
 import { ApplicationListPage } from "./pages/applications/ApplicationListPage";
+import { CommentsListPage } from "./pages/comments/ListCommentsPage";
 import { AdminRoute } from "./components/authentication/AdminRoute";
 import { ListReportsPage } from "./pages/admin/ListReportsPage";
 
@@ -127,6 +128,16 @@ const App = () => {
                   element={
                     <ProtectedRoute>
                       <ApplicationListPage />
+                    </ProtectedRoute>
+                  }
+                ></Route>
+              </Route>
+              <Route path="comments">
+                <Route
+                  path="list/:commentType/:modelID"
+                  element={
+                    <ProtectedRoute>
+                      <CommentsListPage />
                     </ProtectedRoute>
                   }
                 ></Route>

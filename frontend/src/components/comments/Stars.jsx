@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Stars = ({ outOf = 5, onRatingSelected }) => {
   const [hoverRating, setHoverRating] = useState(0);
@@ -14,18 +14,18 @@ const Stars = ({ outOf = 5, onRatingSelected }) => {
 
   const handleClick = (rating) => {
     setCurrentRating(rating);
-    if (onRatingSelected) {
+    if(onRatingSelected) {
       onRatingSelected(rating);
     }
   };
 
   const renderStar = (index) => {
     if (hoverRating >= index) {
-      return "★";
+      return '★';
     } else if (!hoverRating && currentRating >= index) {
-      return "★";
+      return '★';
     }
-    return "☆";
+    return '☆';
   };
 
   return (
@@ -36,7 +36,7 @@ const Stars = ({ outOf = 5, onRatingSelected }) => {
           onMouseOver={() => handleMouseOver(index + 1)}
           onMouseLeave={handleMouseLeave}
           onClick={() => handleClick(index + 1)}
-          style={{ cursor: "pointer", fontSize: "24px", color: "gold" }}
+          style={{ cursor: 'pointer', fontSize: '24px', color: 'gold' }}
         >
           {renderStar(index + 1)}
         </span>
