@@ -4,3 +4,42 @@
 
 # 1. All the packages you need to install
 # 2. How to configure various servers (e.g., Nginx, Apache, etc)
+
+Setup
+Follow these steps to install the project dependencies.
+
+Frontend
+Install nvm.
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+Install npm.
+
+nvm install --lts
+nvm use --lts
+Install the frontend dependencies.
+
+cd ./frontend
+npm ci
+
+Backend
+Run the start-up script.
+
+source startup.sh
+
+Misc
+Pre-commit hooks for code formatting.
+
+pip install pre-commit
+pre-commit install
+
+Running
+Assuming all dependencies are installed, the backend and frontend servers can be run now.
+
+Backend:
+
+source run.sh
+
+Frontend:
+
+cd ./frontend
+npm start
