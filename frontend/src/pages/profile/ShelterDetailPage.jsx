@@ -22,6 +22,7 @@ export const ShelterDetailPage = () => {
   const [mission, setMission] = useState("");
   const [profilePicURL, setProfilePicURL] = useState("");
   const comments = `/comments/list/shelter/${userID}`;
+  const reportPath = `/shelters/${userID}/report/`;
 
   const handleRender = async () => {
     const response = await getUser(userID, "shelter");
@@ -65,7 +66,12 @@ export const ShelterDetailPage = () => {
       <Container className="d-flex flex-column align-items-center my-5">
         <div className="card profile-card p-2">
           <div className="card-body">
-            <h3 className="card-title text-center pb-2">Shelter Detail</h3>
+            <h3 className="card-title text-center pb-2">
+              Shelter Detail
+              <Link to={reportPath} className="ms-2">
+                <i className="fas fa-flag" style={{ color: 'red' }}></i> {/* Red flag icon */}
+              </Link>
+              </h3>
             <div className="py-4 border-top">
               <p className="card-text fw-bold">Profile Picture</p>
               <div className="profile-frame-large border-black">

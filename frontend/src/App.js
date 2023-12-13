@@ -23,6 +23,7 @@ import { ApplicationListPage } from "./pages/applications/ApplicationListPage";
 import { CommentsListPage } from "./pages/comments/ListCommentsPage";
 import { AdminRoute } from "./components/authentication/AdminRoute";
 import { ListReportsPage } from "./pages/admin/ListReportsPage";
+import { MakeReportPage } from "./pages/admin/MakeReportPage";
 
 export const Context = createContext();
 
@@ -53,6 +54,7 @@ const App = () => {
                   }
                 />
                 <Route path=":userID" element={<ShelterDetailPage />} />
+                <Route path=":userID/report" element={<MakeReportPage />} />
               </Route>
               <Route path="seekers">
                 <Route
