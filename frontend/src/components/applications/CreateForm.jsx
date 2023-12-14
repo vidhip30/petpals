@@ -3,7 +3,6 @@ import { getPetListingName } from "../../api/applications";
 import { createApplication } from "../../api/applications";
 import { useNavigate } from "react-router-dom";
 import "./Style.css";
-import { useNavigate } from "react-router-dom";
 
 export const CreateForm = ({ listingID }) => {
   const [petName, setPetName] = useState("");
