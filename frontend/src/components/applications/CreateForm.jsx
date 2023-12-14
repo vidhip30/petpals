@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getPetListingName } from "../../api/applications";
 import { createApplication } from "../../api/applications";
+import { useNavigate } from "react-router-dom";
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
 
 export const CreateForm = ({ listingID }) => {
-  const navigate = useNavigate();
-
   const [petName, setPetName] = useState("");
+  const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({
     address: "",
     phone: "",
