@@ -66,6 +66,8 @@ export const deleteNotification = async (userID, userType, notifyID) => {
 };
 
 export const createNotification = async (userID, userType, payload) => {
+  console.log(userID);
+
   var url;
   if (userType === "shelter") {
     var url = `http://127.0.0.1:8000/accounts/shelter/${userID}/notifications/`;

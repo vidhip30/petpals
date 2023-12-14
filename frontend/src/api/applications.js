@@ -7,7 +7,7 @@ export const getApplication = async (applicationID) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    },
+    }
   );
 
   return response.json();
@@ -34,7 +34,7 @@ export const getPetListingName = async (listingId) => {
       console.error(
         "Failed to fetch pet listing:",
         response.status,
-        response.statusText,
+        response.statusText
       );
       return null;
     }
@@ -64,7 +64,7 @@ export const getPetListingID = async (applicationID) => {
       console.error(
         "Failed to fetch application:",
         response.status,
-        response.statusText,
+        response.statusText
       );
       return null;
     }
@@ -93,7 +93,7 @@ export const createApplication = async (listingID, payload) => {
       console.error(
         "Failed to fetch pet listing:",
         response.status,
-        response.statusText,
+        response.statusText
       );
       return null;
     }
@@ -118,7 +118,7 @@ export const fetchPetDetails = async (applicationID) => {
     });
     if (!response.ok) {
       throw new Error(
-        `HTTP error! Status with pet details: ${response.status}`,
+        `HTTP error! Status with pet details: ${response.status}`
       );
     }
 
@@ -136,6 +136,7 @@ export const fetchPetDetails = async (applicationID) => {
         name: data.name,
         gender: data.gender,
         shelterName: shelterName,
+        shelter: shelterID,
         breed: data.breed,
         size: data.size,
         age: data.age,
@@ -156,7 +157,7 @@ const getShelterName = async (shelterID) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    },
+    }
   );
 
   return response.json();
@@ -206,7 +207,7 @@ export const updateApplication = async (applicationID, payload) => {
       console.error(
         "Failed to fetch application",
         response.status,
-        response.statusText,
+        response.statusText
       );
       return null;
     }

@@ -9,7 +9,7 @@ def directory_path(instance, filename):
 class Notification(models.Model):
     text = models.CharField(max_length=255, null=False)
     image = models.ImageField(upload_to=directory_path, null=True)
-    link = models.URLField(null=True, blank=True)
+    link = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

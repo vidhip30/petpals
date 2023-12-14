@@ -26,6 +26,10 @@ export const Header = () => {
   };
 
   const handleOpen = () => {
+    if (authenticated) {
+      handleRender();
+    }
+
     setShowModal(true);
   };
 
@@ -38,17 +42,10 @@ export const Header = () => {
 
     setNotifications(
       notifications.filter((notification) => {
-        notification.id !== notifyID;
+        return notification.id !== notifyID;
       }),
     );
   };
-
-  useEffect(() => {
-    if (authenticated) {
-      handleRender();
-      markAsRead();
-    }
-  }, []);
 
   useEffect(() => {
     markAsRead();
@@ -97,7 +94,7 @@ export const Header = () => {
 
     read_notifications
       .filter((notification) => {
-        !notification.read;
+        return notification.read;
       })
       .forEach(async (notification) => {
         await updateNotification(userID, userType, notification["id"], {

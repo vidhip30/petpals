@@ -30,6 +30,7 @@ export const createComment = async (
       if (userType === "shelter" && commentType == "application") {
         payload = {
           text: "New comment on your application",
+          link: `http://localhost:3000/comments/list/application/${modelID}`,
         };
 
         createNotification(seeker, "seeker", payload);
@@ -37,10 +38,12 @@ export const createComment = async (
         if (commentType === "application") {
           payload = {
             text: "New comment on an application",
+            link: `http://localhost:3000/comments/list/application/${modelID}`,
           };
         } else {
           payload = {
             text: "New comment on your shelter",
+            link: `http://localhost:3000/comments/list/shelter/${shelter}`,
           };
         }
 

@@ -1,14 +1,17 @@
-from django.http import Http404
 from accounts.models import PetSeeker, Shelter
 from applications.models import Application
-from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, RetrieveAPIView
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import PermissionDenied
-from applications.serializers import CreateApplicationSerializer, UpdateApplicationSerializer, GetApplicationSerializer
-from petListings.models import PetListing
+from applications.serializers import (CreateApplicationSerializer,
+                                      GetApplicationSerializer,
+                                      UpdateApplicationSerializer)
+from django.http import Http404
 from django.shortcuts import get_object_or_404
-from rest_framework.pagination import PageNumberPagination
 from drf_yasg.utils import swagger_auto_schema
+from petListings.models import PetListing
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.generics import (CreateAPIView, ListAPIView,
+                                     RetrieveAPIView, UpdateAPIView)
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 
 
 # Create your views here.
@@ -40,7 +43,7 @@ class ApplicationsCreate(CreateAPIView):
 
 
 class ApplicationsUpdate(UpdateAPIView):
-    
+
     serializer_class = UpdateApplicationSerializer
     permission_classes = [IsAuthenticated]
 
@@ -55,9 +58,10 @@ class ApplicationsUpdate(UpdateAPIView):
         shelter = application.pet_listing.shelter
         pet_seeker = application.user
 
-        if not Shelter.objects.filter(user_ptr = self.request.user, pk = shelter.pk).exists():
-            if not PetSeeker.objects.filter(user_ptr = self.request.user, pk = pet_seeker.pk).exists():
-                raise PermissionDenied("You must be either the pet seeker or shelter associated with the application to update it")
+        if not Shelter.objects.filter(user_ptr=self.request.user, pk=shelter.pk).exists():
+            if not PetSeeker.objects.filter(user_ptr=self.request.user, pk=pet_seeker.pk).exists():
+                raise PermissionDenied(
+                    "You must be either the pet seeker or shelter associated with the application to update it")
 
         return application
 
@@ -122,9 +126,8 @@ class ApplicationsList(ListAPIView):
 
         applications = applications.order_by(*sort_by_val)
 
-        print(applications)
-
         return applications
+
 
 class GetApplication(RetrieveAPIView):
 
@@ -136,13 +139,14 @@ class GetApplication(RetrieveAPIView):
     )
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
-    
+
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs['pk'])
         shelter = application.pet_listing.shelter
         pet_seeker = application.user
-        if not Shelter.objects.filter(user_ptr = self.request.user, pk = shelter.pk).exists():
-            if not PetSeeker.objects.filter(user_ptr = self.request.user, pk = pet_seeker.pk).exists():
-                raise PermissionDenied("You must be either the pet seeker or shelter associated with the application")
+        if not Shelter.objects.filter(user_ptr=self.request.user, pk=shelter.pk).exists():
+            if not PetSeeker.objects.filter(user_ptr=self.request.user, pk=pet_seeker.pk).exists():
+                raise PermissionDenied(
+                    "You must be either the pet seeker or shelter associated with the application")
 
         return application

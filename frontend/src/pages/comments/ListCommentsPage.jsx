@@ -1,4 +1,5 @@
 import { listComments } from "../../api/comments";
+import { getApplication, fetchPetDetails } from "../../api/applications";
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { Comment } from "../../components/comments/Comment";
@@ -13,7 +14,10 @@ export const CommentsListPage = () => {
   const [comments, setComments] = useState([]);
   const [prevPage, setPrevPage] = useState(null);
   const [nextPage, setNextPage] = useState(null);
+  const [application, setApplication] = useState([]);
+  const [pet, setPet] = useState([]);
   const { commentType, modelID } = useParams();
+  const userType = localStorage.getItem("userType");
 
   const getComments = async () => {
     try {
@@ -39,10 +43,27 @@ export const CommentsListPage = () => {
     setPrevPage(response["previous"]);
     setNextPage(response["next"]);
   };
+  const handleapp = async () => {
+    const response = await getApplication(modelID);
+    setApplication(response);
+  };
+
+  const handlepet = async () => {
+    const response = await fetchPetDetails(modelID);
+    setPet(response);
+  };
 
   useEffect(() => {
     getComments();
   }, [commentType, modelID]);
+
+  useEffect(() => {
+    handleapp();
+  }, [modelID]);
+
+  useEffect(() => {
+    handlepet();
+  }, [modelID]);
 
   return (
     <main>
@@ -62,12 +83,20 @@ export const CommentsListPage = () => {
               shelter={modelID}
               onCommentPosted={getComments}
             />
-          ) : (
+          ) : userType === "seeker" ? (
             <CommentForm
               objectID={modelID}
               objectType="application"
               seeker={localStorage.getItem("userID")}
-              shelter={modelID}
+              shelter={pet.shelter}
+              onCommentPosted={getComments}
+            />
+          ) : (
+            <CommentForm
+              objectID={modelID}
+              objectType="application"
+              seeker={application.user}
+              shelter={localStorage.getItem("userID")}
               onCommentPosted={getComments}
             />
           )}
