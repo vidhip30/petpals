@@ -10,8 +10,6 @@ export const SeekerUpdateApplicationForm = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Check if all fields are valid
-
     const payload = {
       status: "withdrawn",
     };

@@ -1,8 +1,8 @@
 import { TextField, validatePlaintext } from "../shared/TextField";
 import Button from "react-bootstrap/Button";
-import { DropdownField } from "./DropdownField";
-import { DescriptionField } from "./DescriptionField";
-import { ImageField } from "./ImageField";
+import { UpdateDropdownField } from "./UpdateDropdownField";
+import { UpdateDescriptionField } from "./UpdateDescriptionField";
+import { UpdateImageField } from "./UpdateImageField";
 import { SimpleTextField } from "../shared/SimpleTextField";
 
 export const PetUpdateFormBody = ({ formInfo, setFormInfo }) => {
@@ -65,7 +65,7 @@ export const PetUpdateFormBody = ({ formInfo, setFormInfo }) => {
           />
         </div>
         <div className="col">
-          <DropdownField
+          <UpdateDropdownField
             fieldName="gender"
             placeholder="Select Gender"
             options={gender_options}
@@ -91,7 +91,7 @@ export const PetUpdateFormBody = ({ formInfo, setFormInfo }) => {
           />
         </div>
         <div className="col">
-          <DropdownField
+          <UpdateDropdownField
             fieldName="status"
             placeholder="Select Status"
             options={status_options}
@@ -102,7 +102,7 @@ export const PetUpdateFormBody = ({ formInfo, setFormInfo }) => {
           />
         </div>
       </div>
-      <DescriptionField
+      <UpdateDescriptionField
         fieldName="description"
         placeholder="Description"
         rows={4} // Set the number of rows you desire
@@ -113,7 +113,7 @@ export const PetUpdateFormBody = ({ formInfo, setFormInfo }) => {
           setFormInfo({ ...formInfo, description: e.target.value })
         }
       />
-      <ImageField
+      <UpdateImageField
         fieldName="picture"
         label="pet-picture"
         accept="image/*"
