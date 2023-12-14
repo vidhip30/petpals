@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getPetListingName } from "../../api/applications";
 import { createApplication } from "../../api/applications";
+import { useNavigate } from "react-router-dom";
 import "./Style.css";
 export const CreateForm = ({ listingID }) => {
   const [petName, setPetName] = useState("");
+  const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({
     address: "",
     phone: "",
@@ -106,7 +108,7 @@ export const CreateForm = ({ listingID }) => {
     const occupationValid = validateField(
       "occupation",
       formData.occupation,
-      /.+/,
+      /.+/
     );
     if (!occupationValid) {
       setFormErrors((prevFormErrors) => ({
@@ -136,7 +138,7 @@ export const CreateForm = ({ listingID }) => {
     const petCensusValid = validateField(
       "petCensus",
       formData.petCensus,
-      /^\d+$/,
+      /^\d+$/
     );
     if (!petCensusValid) {
       setFormErrors((prevFormErrors) => ({
@@ -206,11 +208,12 @@ export const CreateForm = ({ listingID }) => {
         if (response && response.ok) {
           // Application submitted successfully
           console.log("Application submitted successfully");
+          navigate("/applications/list");
         } else {
           console.error(
             "Failed to submit application:",
             response.status,
-            response.statusText,
+            response.statusText
           );
         }
       } catch (error) {
