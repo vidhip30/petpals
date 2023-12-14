@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { updatePetListing } from "../../api/shelter";
 
 export const DescriptionField = ({
   fieldName,
@@ -8,9 +7,8 @@ export const DescriptionField = ({
   rows,
   errorMessage,
   validate,
-  update,
-  value,
 }) => {
+  const [text, setText] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
@@ -23,11 +21,11 @@ export const DescriptionField = ({
         name={fieldName}
         placeholder={placeholder}
         rows={rows}
-        value={value}
+        value={text}
         isInvalid={!isValid && isChanged}
         onChange={(e) => {
           const inputValue = e.target.value;
-          update(e);
+          setText(inputValue);
           setIsValid(validate(inputValue));
           setIsChanged(true);
         }}
