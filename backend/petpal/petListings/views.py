@@ -8,13 +8,12 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-
 from .models import PetListing
 from .serializers import PetListingSerializer
 
 
 class CustomPaginator(PageNumberPagination):
-    page_size = 12
+    page_size = 2
     page_query_param = "page"
     page_size_query_param = "page_size"
 
@@ -32,7 +31,8 @@ class PetListingsCreate(CreateAPIView):
 
     def perform_create(self, serializer):
         if Shelter.objects.filter(user_ptr=self.request.user).exists():
-            serializer.save(shelter = (Shelter.objects.filter(user_ptr=self.request.user)[0]))
+            serializer.save(
+                shelter=(Shelter.objects.filter(user_ptr=self.request.user)[0]))
         else:
             raise PermissionDenied(
                 detail="You do not have permission to create this pet listing.")
@@ -68,10 +68,9 @@ class PetListingsList(ListAPIView):
         if status:
             valid_statuses = []
             for s in status:
-                if s in ['adopted', 'pending', 'withdrawn','available']:
+                if s in ['adopted', 'pending', 'withdrawn', 'available']:
                     valid_statuses.append(s)
             listings = listings.filter(status__in=valid_statuses)
-        
 
         if breed:
             listings = listings.filter(breed__in=breed)
@@ -81,8 +80,7 @@ class PetListingsList(ListAPIView):
                 if g in ['female', 'male']:
                     valid_genders.append(g)
             listings = listings.filter(gender__in=valid_genders)
-        
-           
+
         if sort_by:
             sort_by_val = []
             for s in sort_by:
@@ -138,7 +136,7 @@ class ListingsRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         instance = self.get_object()
-        
+
         if self.request.user.username != instance.shelter.username:
             raise PermissionDenied(
                 detail="You do not have permission to update this pet listing."
@@ -159,7 +157,7 @@ class ListingsRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
         # Perform the delete
         return super().delete(request, *args, **kwargs)
-    
+
     def perform_destroy(self, instance):
         if self.request.user.username != instance.shelter.username:
             raise PermissionDenied(

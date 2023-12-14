@@ -158,7 +158,6 @@ const getShelterName = async (shelterID) => {
       },
     },
   );
-  console.log(`shelter info: ${response}`);
 
   return response.json();
 };
@@ -181,7 +180,6 @@ export const listApplications = async (searchStatus, sortBy, url) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const responseData = await response.json();
-    console.log(responseData);
     return responseData;
   } catch (error) {
     console.error("Error with list applications", error);

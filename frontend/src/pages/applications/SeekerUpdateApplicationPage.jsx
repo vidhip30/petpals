@@ -10,7 +10,6 @@ export const SeekerUpdateApplicationPage = () => {
   const { applicationID } = useParams();
   const fetchApplication = async () => {
     const applicationData = await getApplication(applicationID);
-    console.log(applicationData);
     setStatusInfo(applicationData.status);
   };
 

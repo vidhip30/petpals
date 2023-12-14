@@ -26,10 +26,9 @@ export const PetUpdateForm = ({ listingId, formInfo, setFormInfo }) => {
     const response = await updatePetListing(listingId, payload);
 
     if (response.status === 200) {
-      console.log("Pet update successful!");
       navigate("/");
     } else {
-      console.log("Error with pet update!");
+      console.error("Error with pet update!");
     }
   };
 

@@ -29,8 +29,6 @@ export const ApplicationCard = ({ applicationID }) => {
   const { picture, name, gender, shelterName, breed, size, age, user } =
     petDetails;
 
-  console.log(user);
-
   // Determine the gender symbol
   const symbol = gender === "male" ? "♂" : "♀";
 

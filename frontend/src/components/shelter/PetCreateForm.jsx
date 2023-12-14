@@ -24,10 +24,9 @@ export const PetCreateForm = () => {
     const response = await createPetListing(payload);
 
     if (response.status === 201) {
-      console.log("Pet creation successful!");
       navigate("/");
     } else {
-      console.log("Error with pet creation!");
+      console.error("Error with pet creation!");
     }
   };
 

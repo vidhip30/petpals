@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../signup/Style.css";
 import { login } from "../../../api/accounts";
-import { Context } from "../../../App";
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -43,6 +42,7 @@ export const LoginForm = () => {
     if (loginResult.success) {
       // Redirect to the index page upon successful login
       navigate("/");
+      window.location.reload();
     } else {
       // Update the state with the error message
       setValidated(true);

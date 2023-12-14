@@ -63,8 +63,7 @@ export const createComment = async (
 };
 
 export const listComments = async (commentType, modelID, url) => {
-  
-  if (url === undefined){
+  if (url === undefined) {
     if (commentType === "application") {
       url = `http://127.0.0.1:8000/comments/application/${modelID}/`;
     } else {
@@ -80,12 +79,11 @@ export const listComments = async (commentType, modelID, url) => {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     });
-  
+
     if (response.ok) {
       // Process the response when it is successful
       // For example, parse the JSON response or do something with the data
       const data = await response.json();
-      console.log("Successful response:", data);
       return data;
     } else {
       // Handle the case when the response is not okay (e.g., status code is not in the 200 range)
@@ -96,5 +94,4 @@ export const listComments = async (commentType, modelID, url) => {
     console.error("Error fetching object:", error.message);
     return null;
   }
-
 };

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { getPetListingName } from "../../api/applications";
 import { createApplication } from "../../api/applications";
 import "./Style.css";
+import { useNavigate } from "react-router-dom";
+
 export const CreateForm = ({ listingID }) => {
+  const navigate = useNavigate();
+
   const [petName, setPetName] = useState("");
   const [formErrors, setFormErrors] = useState({
     address: "",
@@ -198,14 +202,12 @@ export const CreateForm = ({ listingID }) => {
         adoption_reason: formData.why,
       };
 
-      console.log("Payload:", payload);
-
       try {
         const response = await createApplication(listingID, payload);
 
         if (response && response.ok) {
           // Application submitted successfully
-          console.log("Application submitted successfully");
+          navigate("/applications/list");
         } else {
           console.error(
             "Failed to submit application:",
@@ -216,8 +218,6 @@ export const CreateForm = ({ listingID }) => {
       } catch (error) {
         console.error("Error submitting application:", error.message);
       }
-
-      console.log("Form submitted:", formData);
     } else {
       console.error("Form has errors. Cannot submit.");
     }
