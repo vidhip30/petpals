@@ -52,7 +52,7 @@ export const CommentForm = ({
       validated={validated}
       onSubmit={handleSubmit}
     >
-      <label class="fs-5" for="reply-input">
+      <label className="fs-5" htmlFor="reply-input">
         Comment:
       </label>
 
