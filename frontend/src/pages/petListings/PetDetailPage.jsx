@@ -78,7 +78,7 @@ export const PetDetailPage = () => {
             Currently {pet.status}
           </Button>
         ) : userType === "seeker" ? (
-          <Link to={`/applications/${pet.id}`}>
+          <Link to={`/applications/create/${pet.id}`}>
             <Button className="adopt-button">Adopt!</Button>
           </Link>
         ) : pet.shelter == userID ? (
